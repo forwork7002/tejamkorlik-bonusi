@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tejamkorlik bonusi</title>
+<meta name="description" content="Sinolife Collagen M marketologi uchun tejamkorlik bonusi kalkulyatori">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f5f9; --surface:#ffffff; --surface-2:#f7f9fc; --sunk:#eef2f7;
+  --ink:#112033; --ink-2:#34465c; --muted:#66778b; --line:#d9e1ea; --line-2:#e8edf3;
+  --accent:#2a78d6; --accent-strong:#1f63b6; --accent-soft:#e6effb; --on-accent:#ffffff;
+  --company:#9aabbf; --company-soft:#e9eef4; --cost:#c9d4e1;
+  --good:#0ca30c; --good-soft:#e3f5e3; --good-ink:#0a7a0a;
+  --warn:#fab219; --warn-soft:#fff4d9; --warn-ink:#8a5a00;
+  --crit:#d03b3b; --crit-soft:#fbe8e8; --crit-ink:#a82727;
+  --hero-bg:#112033; --hero-ink:#f3f7fb; --hero-muted:#9fb1c5; --hero-line:#2a3b50;
+  --shadow:0 1px 0 rgba(17,32,51,.04),0 18px 40px -24px rgba(17,32,51,.35);
+  --f-head:"IBM Plex Sans Condensed","Arial Narrow","Roboto Condensed",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d131a; --surface:#151d27; --surface-2:#1a2330; --sunk:#111821;
+    --ink:#e7eef6; --ink-2:#c0ccd9; --muted:#8e9db0; --line:#273445; --line-2:#1f2a38;
+    --accent:#3987e5; --accent-strong:#5a9cec; --accent-soft:#16273d; --on-accent:#ffffff;
+    --company:#5f7189; --company-soft:#1c2633; --cost:#33435a;
+    --good:#0ca30c; --good-soft:#12291a; --good-ink:#5fd35f;
+    --warn:#fab219; --warn-soft:#2d2513; --warn-ink:#f5c45a;
+    --crit:#d03b3b; --crit-soft:#2e1719; --crit-ink:#f08282;
+    --hero-bg:#0a1017; --hero-ink:#eef3f8; --hero-muted:#8798ac; --hero-line:#223144;
+    --shadow:0 1px 0 rgba(0,0,0,.3),0 18px 40px -24px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d131a; --surface:#151d27; --surface-2:#1a2330; --sunk:#111821;
+  --ink:#e7eef6; --ink-2:#c0ccd9; --muted:#8e9db0; --line:#273445; --line-2:#1f2a38;
+  --accent:#3987e5; --accent-strong:#5a9cec; --accent-soft:#16273d; --on-accent:#ffffff;
+  --company:#5f7189; --company-soft:#1c2633; --cost:#33435a;
+  --good:#0ca30c; --good-soft:#12291a; --good-ink:#5fd35f;
+  --warn:#fab219; --warn-soft:#2d2513; --warn-ink:#f5c45a;
+  --crit:#d03b3b; --crit-soft:#2e1719; --crit-ink:#f08282;
+  --hero-bg:#0a1017; --hero-ink:#eef3f8; --hero-muted:#8798ac; --hero-line:#223144;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 18px 40px -24px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:400 15px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+.num,input,td.n,th.n{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--f-mono)}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ---------- Header ---------- */
+.top{background:var(--hero-bg);color:var(--hero-ink);padding:40px 0 104px;position:relative;overflow:hidden}
+.top::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:var(--hero-line)}
+.top .grid-bg{position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:linear-gradient(var(--hero-line) 1px,transparent 1px),linear-gradient(90deg,var(--hero-line) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 85%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 85%)}
+.top .wrap{position:relative}
+.kicker{display:flex;align-items:center;gap:10px;color:var(--hero-muted);font-size:13.5px;margin:0 0 18px}
+.kicker .dot{width:8px;height:8px;border-radius:2px;background:var(--accent)}
+h1{font:700 clamp(40px,7vw,72px)/.95 var(--f-head);letter-spacing:-.02em;margin:0 0 18px}
+.lead{max-width:62ch;font-size:clamp(16px,1.9vw,18.5px);line-height:1.5;color:var(--hero-ink);opacity:.92;margin:0 0 26px}
+.lead b{font-weight:600;font-family:var(--f-mono);font-size:.95em}
+.formula{display:grid;gap:8px;max-width:760px}
+.fline{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:500 13.5px/1.3 var(--f-mono);color:var(--hero-muted)}
+.fline .t{color:var(--hero-ink);background:rgba(255,255,255,.06);border:1px solid var(--hero-line);border-radius:6px;padding:5px 9px}
+.fline .t.res{background:var(--accent);border-color:var(--accent);color:#fff}
+.fline .op{color:var(--hero-muted)}
+.fnote{font-size:13px;color:var(--hero-muted);margin:6px 0 0}
+
+/* ---------- Presets ---------- */
+.presets{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.presets .lbl{color:var(--hero-muted);font-size:13.5px}
+.seg{display:inline-flex;flex-wrap:wrap;background:rgba(255,255,255,.07);border:1px solid var(--hero-line);border-radius:10px;padding:4px;gap:4px}
+.seg button{appearance:none;border:0;background:transparent;color:var(--hero-ink);font:500 14px/1 var(--f-body);padding:10px 14px;border-radius:7px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left}
+.seg button small{font:400 12px/1 var(--f-mono);color:var(--hero-muted)}
+.seg button:hover{background:rgba(255,255,255,.07)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.seg button[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+
+/* ---------- Calculator ---------- */
+.calc{display:grid;gap:20px;margin-top:-72px;position:relative;z-index:2;align-items:start}
+@media (min-width:820px){.calc{grid-template-columns:minmax(0,1fr) minmax(340px,430px)}}
+.calc>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.inputs{padding:6px 22px 10px}
+fieldset{min-width:0;border:0;margin:0;padding:18px 0 20px;border-top:1px solid var(--line-2)}
+fieldset:first-child{border-top:0}
+legend{font:600 17px/1.2 var(--f-head);letter-spacing:.005em;padding:0;margin-bottom:4px;float:left;width:100%}
+.legend-sub{clear:both;color:var(--muted);font-size:13.5px;margin:0 0 14px;padding-top:2px}
+.fields{clear:both;display:grid;gap:14px 16px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.field label{display:block;font-weight:500;font-size:14px;color:var(--ink-2);margin-bottom:6px}
+.inp{display:flex;align-items:center;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;transition:border-color .15s,box-shadow .15s}
+.inp:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.inp.bad{border-color:var(--crit)}
+.field{min-width:0}
+.inp input{flex:1;min-width:0;width:100%;border:0;background:transparent;color:var(--ink);font:500 16px/1 var(--f-mono);padding:11px 10px;outline:none}
+.inp .u{font:400 13px/1 var(--f-mono);color:var(--muted);padding:0 10px;white-space:nowrap}
+.inp .u.pre{padding-right:0}
+.field .hint{display:block;font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.4}
+
+/* ---------- Result ---------- */
+.result{overflow:hidden}
+@media (min-width:820px){.result{position:sticky;top:calc(16px + env(safe-area-inset-top,0px))}}
+.r-head{padding:20px 22px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.r-head h2{font:600 17px/1.2 var(--f-head);margin:0}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:99px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.pill i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.good{background:var(--good-soft);color:var(--good-ink)}
+.pill.warn{background:var(--warn-soft);color:var(--warn-ink)}
+.pill.crit{background:var(--crit-soft);color:var(--crit-ink)}
+.big{padding:10px 22px 4px}
+.big .v{font:600 clamp(48px,6vw,60px)/1 var(--f-head);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.big .v.zero{color:var(--muted)}
+.big .s{font:400 14px/1.4 var(--f-mono);color:var(--muted);margin-top:8px}
+.alert{margin:14px 22px 0;padding:11px 13px;border-radius:9px;font-size:13.5px;line-height:1.45;display:none}
+.alert.show{display:block}
+.alert.crit{background:var(--crit-soft);color:var(--crit-ink)}
+.alert.warn{background:var(--warn-soft);color:var(--warn-ink)}
+
+.ruler{margin:20px 22px 0;padding:16px 16px 14px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:11px}
+.ruler-cap{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted);margin-bottom:30px}
+.ruler-cap b{font:600 13px var(--f-mono);color:var(--ink)}
+.track{position:relative;height:30px;border-radius:6px;background:var(--sunk)}
+.track .sg{position:absolute;top:0;bottom:0;transition:left .35s cubic-bezier(.2,.7,.2,1),width .35s cubic-bezier(.2,.7,.2,1)}
+.sg.cost{background:var(--cost);border-radius:6px 0 0 6px}
+.sg.bonus{background:var(--accent)}
+.sg.comp{background:var(--company)}
+.sg.comp.blocked{background:repeating-linear-gradient(135deg,var(--company) 0 5px,var(--company-soft) 5px 10px)}
+.sg.over{background:repeating-linear-gradient(135deg,var(--crit) 0 5px,var(--crit-soft) 5px 10px)}
+.stdmark{position:absolute;top:-22px;bottom:-6px;width:0;border-left:2px dashed var(--ink);transition:left .35s cubic-bezier(.2,.7,.2,1)}
+.stdmark span{position:absolute;bottom:100%;transform:translate(-50%,-3px);font:500 11.5px/1 var(--f-mono);white-space:nowrap;color:var(--ink);background:var(--surface-2);padding:2px 4px;margin-bottom:-14px}
+.stdmark.r span{transform:translate(calc(-100% + 1px),-3px)}
+.scale{display:flex;justify-content:space-between;font:400 11px/1 var(--f-mono);color:var(--muted);margin-top:7px}
+.legend{display:grid;gap:7px;margin-top:14px}
+.lg{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2)}
+.lg .sw{width:12px;height:12px;border-radius:3px;flex:none}
+.lg .sw.cost{background:var(--cost)} .lg .sw.bonus{background:var(--accent)} .lg .sw.comp{background:var(--company)}
+.lg .sw.over{background:repeating-linear-gradient(135deg,var(--crit) 0 3px,var(--crit-soft) 3px 6px)}
+.lg .sw.blocked{background:repeating-linear-gradient(135deg,var(--company) 0 3px,var(--company-soft) 3px 6px)}
+.lg .lv{margin-left:auto;font:500 13px var(--f-mono);color:var(--ink)}
+.lg[hidden]{display:none}
+
+.rows{margin:16px 22px 0;padding:0}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px solid var(--line-2);font-size:14px}
+.row:first-child{border-top:0}
+.row dt{color:var(--ink-2)}
+.row dd{margin:0;font:500 14.5px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.row.strong dt{color:var(--ink);font-weight:600}
+.row.strong dd{color:var(--accent-strong);font-weight:600}
+.neg{color:var(--crit-ink)!important}
+
+.split{margin:6px 22px 0}
+.split .bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--sunk)}
+.split .bar span{transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.split .bar .a{background:var(--accent)} .split .bar .b{background:var(--company)}
+.split .cap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
+
+.extra{margin:20px 0 0;padding:16px 22px 20px;background:var(--surface-2);border-top:1px solid var(--line-2);display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.extra h3{grid-column:1/-1;margin:0;font:600 14px/1.2 var(--f-head);color:var(--ink-2)}
+.kv .k{font-size:12.5px;color:var(--muted);margin-bottom:3px}
+.kv .v{font:500 17px/1.2 var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- Sections ---------- */
+section.block{margin-top:44px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:6px 20px;margin-bottom:14px}
+.sec-head h2{font:600 clamp(24px,3vw,30px)/1.1 var(--f-head);letter-spacing:-.01em;margin:0}
+.sec-head p{margin:0;color:var(--muted);font-size:14px;max-width:60ch}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th,td{padding:12px 16px;text-align:left;border-top:1px solid var(--line-2);white-space:nowrap}
+thead th{border-top:0;font:500 12.5px/1.3 var(--f-body);color:var(--muted);background:var(--surface-2)}
+th.n,td.n{text-align:right;font-family:var(--f-mono)}
+tbody tr:hover{background:var(--surface-2)}
+tr.cur td{background:var(--accent-soft)}
+td.bonus-cell{width:34%}
+.bc{display:flex;align-items:center;gap:12px;justify-content:flex-end}
+.bc .track2{flex:1;min-width:60px;max-width:180px;height:8px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.bc .track2 span{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .35s}
+.bc b{font:600 14px var(--f-mono);min-width:70px;text-align:right}
+.bc b.zero{color:var(--muted);font-weight:500}
+.muted{color:var(--muted)}
+tfoot td{font-weight:600;border-top:2px solid var(--line);background:var(--surface-2)}
+.tag{display:inline-block;font:500 11.5px/1 var(--f-body);padding:4px 7px;border-radius:5px;background:var(--sunk);color:var(--muted)}
+.tag.crit{background:var(--crit-soft);color:var(--crit-ink)}
+.tag.warn{background:var(--warn-soft);color:var(--warn-ink)}
+
+.guard{display:grid;gap:20px;padding:24px;border-left:4px solid var(--warn)}
+@media (min-width:820px){.guard{grid-template-columns:1fr 1.15fr;align-items:center}}
+.guard h2{font:600 clamp(22px,2.6vw,27px)/1.15 var(--f-head);margin:0 0 10px}
+.guard p{margin:0 0 10px;color:var(--ink-2);max-width:58ch}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cmp{border:1px solid var(--line);border-radius:11px;padding:14px;background:var(--surface-2)}
+.cmp h4{margin:0 0 10px;font:600 14px var(--f-head)}
+.cmp dl{margin:0;display:grid;gap:6px}
+.cmp dl div{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.cmp dt{color:var(--muted)} .cmp dd{margin:0;font:500 13px var(--f-mono)}
+.cmp .out{margin-top:10px;padding-top:10px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.linkbtn{appearance:none;background:none;border:0;padding:0;color:var(--accent);font:500 14px var(--f-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+details.fact{padding:0}
+details.fact summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+details.fact summary::-webkit-details-marker{display:none}
+details.fact summary h2{font:600 clamp(20px,2.4vw,24px)/1.2 var(--f-head);margin:0 0 4px}
+details.fact summary p{margin:0;color:var(--muted);font-size:14px}
+.chev{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.fact-body{padding:0 24px 22px}
+.fact-body .tablewrap{border:1px solid var(--line-2)}
+.fact-note{font-size:13.5px;color:var(--ink-2);margin:14px 0 0;max-width:80ch}
+
+footer{margin:44px 0 0;padding:22px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+footer p{margin:0 0 6px;max-width:80ch}
+
+/* ---------- Mobile bonus bar ---------- */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--hero-bg);color:var(--hero-ink);
+  padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:12px;
+  transform:translateY(110%);transition:transform .25s;border-top:1px solid var(--hero-line)}
+.mbar.show{transform:none}
+.mbar .k{font-size:12.5px;color:var(--hero-muted)}
+.mbar .v{font:600 22px/1.1 var(--f-head);font-variant-numeric:tabular-nums}
+.mbar button{appearance:none;border:1px solid var(--hero-line);background:rgba(255,255,255,.08);color:var(--hero-ink);font:500 13.5px var(--f-body);padding:9px 13px;border-radius:8px;cursor:pointer}
+@media (min-width:820px){.mbar{display:none}}
+
+@media (max-width:520px){
+  .wrap{padding:0 14px}
+  .top{padding:28px 0 84px}
+  .inputs{padding:4px 16px 8px}
+  .r-head,.big{padding-left:16px;padding-right:16px}
+  .ruler,.rows,.split,.alert{margin-left:16px;margin-right:16px}
+  .extra{padding:14px 16px 18px}
+  .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .compare{grid-template-columns:1fr}
+  .guard{padding:18px}
+  details.fact summary{padding:18px}
+  .fact-body{padding:0 18px 18px}
+  .seg button{padding:9px 11px;font-size:13.5px}
+}
+@media (max-width:620px){
+  table{min-width:0}
+  th,td{padding:11px 10px}
+  .hide-s{display:none}
+  .bc .track2{display:none}
+  .bc b{min-width:0}
+  .seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+  .presets .lbl{width:100%}
+  .seg button{padding:9px 8px}
+  .hm{display:none}
+  .fact-body{padding:0 12px 16px}
+}
+@media (max-width:360px){.fields{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker"><span class="dot" aria-hidden="true"></span>Sinolife, Collagen M marketologi uchun KPI</p>
+    <h1>Tejamkorlik bonusi</h1>
+    <p class="lead">Standart kval lid narxi <b id="h-std">$4.00</b>, barcha xarajatlar bilan. Marketolog narxni shundan arzonga tushirsa, har tejalgan dollarning <b id="h-share">50%</b> i unga bonus bo'ladi.</p>
+    <div class="formula" aria-label="Formula">
+      <div class="fline"><span class="t res">Haqiqiy CPQL</span><span class="op">=</span><span class="op">(</span><span class="t">Reklama byudjeti</span><span class="op">+</span><span class="t">Boshqa xarajatlar</span><span class="op">)</span><span class="op">÷</span><span class="t">Kval lid</span></div>
+      <div class="fline"><span class="t res">Bonus</span><span class="op">=</span><span class="op">(</span><span class="t">Standart CPQL</span><span class="op">−</span><span class="t">Haqiqiy CPQL</span><span class="op">)</span><span class="op">×</span><span class="t">Kval lid</span><span class="op">×</span><span class="t">Ulush</span></div>
+      <p class="fnote">Narx standartdan qimmat yoki kval lid minimaldan kam bo'lsa, bonus 0. Jarima yo'q.</p>
+    </div>
+    <div class="presets">
+      <span class="lbl">Misol:</span>
+      <div class="seg" role="group" aria-label="Misol holatlar">
+        <button type="button" id="p-std" aria-pressed="false">Standart oy<small><span class="hm">2 500 kval · </span>$4.00</small></button>
+        <button type="button" id="p-good" aria-pressed="true">Yaxshilangan oy<small><span class="hm">3 333 kval · </span>$3.00</small></button>
+        <button type="button" id="p-cheat" aria-pressed="false">Aldash urinishi<small><span class="hm">1 000 kval · </span>$2.00</small></button>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="calc">
+    <div class="panel inputs">
+      <fieldset>
+        <legend>Bonus sharti</legend>
+        <p class="legend-sub">Rahbar belgilaydi, oyma-oy o'zgarmaydi.</p>
+        <div class="fields">
+          <div class="field"><label for="i-std">Standart CPQL</label><div class="inp"><span class="u pre">$</span><input id="i-std" inputmode="decimal" autocomplete="off" value="4.00"></div><span class="hint">Barcha xarajatlar bilan kval lid narxi</span></div>
+          <div class="field"><label for="i-share">Marketolog ulushi</label><div class="inp"><input id="i-share" inputmode="decimal" autocomplete="off" value="50"><span class="u">%</span></div><span class="hint">Tejalgan summadan</span></div>
+          <div class="field"><label for="i-min">Minimal kval lid</label><div class="inp"><input id="i-min" inputmode="numeric" autocomplete="off" value="2500"><span class="u">dona</span></div><span class="hint">0 bo'lsa, shart o'chadi</span></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Oy natijasi</legend>
+        <p class="legend-sub">Hisobotdagi haqiqiy raqamlar.</p>
+        <div class="fields">
+          <div class="field"><label for="i-budget">Reklama byudjeti</label><div class="inp"><span class="u pre">$</span><input id="i-budget" inputmode="decimal" autocomplete="off" value="10000"></div></div>
+          <div class="field"><label for="i-other">Boshqa xarajatlar</label><div class="inp"><span class="u pre">$</span><input id="i-other" inputmode="decimal" autocomplete="off" value="0"></div><span class="hint">Standartga kirgan xarajatlar</span></div>
+          <div class="field"><label for="i-leads">Jami lid</label><div class="inp"><input id="i-leads" inputmode="numeric" autocomplete="off" value="10000"><span class="u">dona</span></div></div>
+          <div class="field"><label for="i-q">Kval lid</label><div class="inp"><input id="i-q" inputmode="numeric" autocomplete="off" value="3333"><span class="u">dona</span></div></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Qo'shimcha ko'rsatkichlar</legend>
+        <p class="legend-sub">Bonusga ta'sir qilmaydi, CAC va reklama ulushini hisoblash uchun.</p>
+        <div class="fields">
+          <div class="field"><label for="i-tx">Tranzaksiya</label><div class="inp"><input id="i-tx" inputmode="numeric" autocomplete="off" value="667"><span class="u">dona</span></div></div>
+          <div class="field"><label for="i-chek">O'rtacha chek</label><div class="inp"><input id="i-chek" inputmode="numeric" autocomplete="off" value="1500000"><span class="u">so'm</span></div></div>
+          <div class="field"><label for="i-kurs">USD kursi</label><div class="inp"><input id="i-kurs" inputmode="numeric" autocomplete="off" value="12000"><span class="u">so'm</span></div></div>
+        </div>
+      </fieldset>
+    </div>
+
+    <aside class="panel result" id="result" aria-live="polite">
+      <div class="r-head"><h2>Marketolog bonusi</h2><span class="pill" id="r-status"><i></i><span>—</span></span></div>
+      <div class="big">
+        <div class="v" id="r-bonus">$0</div>
+        <div class="s" id="r-bonus-uzs">≈ 0 so'm</div>
+      </div>
+      <div class="alert" id="r-alert" role="status"></div>
+
+      <div class="ruler" aria-label="Bitta kval lid narxining taqsimoti">
+        <div class="ruler-cap"><span>Bitta kval lid narxi</span><b id="g-cap">$3.00</b></div>
+        <div class="track">
+          <div class="sg cost" id="g-cost"></div>
+          <div class="sg bonus" id="g-bonus"></div>
+          <div class="sg comp" id="g-comp"></div>
+          <div class="sg over" id="g-over"></div>
+          <div class="stdmark" id="g-std"><span id="g-std-l">Standart $4.00</span></div>
+        </div>
+        <div class="scale"><span>$0</span><span id="g-max">$4.40</span></div>
+        <div class="legend">
+          <div class="lg" id="l-cost"><span class="sw cost"></span>Haqiqiy narx<span class="lv" id="l-cost-v">—</span></div>
+          <div class="lg" id="l-bonus"><span class="sw bonus"></span>Marketologga<span class="lv" id="l-bonus-v">—</span></div>
+          <div class="lg" id="l-comp"><span class="sw comp" id="l-comp-sw"></span><span id="l-comp-t">Kompaniyaga</span><span class="lv" id="l-comp-v">—</span></div>
+          <div class="lg" id="l-over" hidden><span class="sw over"></span>Standartdan ortiqcha<span class="lv" id="l-over-v">—</span></div>
+        </div>
+      </div>
+
+      <dl class="rows">
+        <div class="row"><dt>Haqiqiy CPQL</dt><dd id="r-cpql">—</dd></div>
+        <div class="row"><dt>1 liddan tejam</dt><dd id="r-per">—</dd></div>
+        <div class="row"><dt>Jami tejam</dt><dd id="r-total">—</dd></div>
+        <div class="row strong"><dt>Bonus <span class="muted" id="r-share-l">(50%)</span></dt><dd id="r-bonus2">—</dd></div>
+        <div class="row"><dt>Kompaniyada qoladi</dt><dd id="r-company">—</dd></div>
+      </dl>
+      <div class="split" aria-hidden="true">
+        <div class="bar"><span class="a" id="s-a" style="width:50%"></span><span class="b" id="s-b" style="width:50%"></span></div>
+        <div class="cap"><span>Marketolog</span><span>Kompaniya</span></div>
+      </div>
+
+      <div class="extra">
+        <h3>Voronka</h3>
+        <div class="kv"><div class="k">Lid narxi</div><div class="v" id="x-lead">—</div></div>
+        <div class="kv"><div class="k">Lid → kval lid</div><div class="v" id="x-conv">—</div></div>
+        <div class="kv"><div class="k">CAC</div><div class="v" id="x-cac">—</div></div>
+        <div class="kv"><div class="k">Reklama ulushi chekda</div><div class="v" id="x-share">—</div></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="block" aria-labelledby="scen-h">
+    <div class="sec-head">
+      <h2 id="scen-h">Narx pasaysa, bonus qanday o'sadi</h2>
+      <p id="scen-sub">Xarajat o'zgarmas, kval lid narxi standartdan pasayib boradi.</p>
+    </div>
+    <div class="panel tablewrap">
+      <table id="scen">
+        <thead><tr><th>Narx pasayishi</th><th class="n">Haqiqiy CPQL</th><th class="n">Kval lid</th><th class="n hide-s">Jami tejam</th><th class="n">Bonus</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="panel guard">
+      <div>
+        <h2>Nega minimal kval lid sharti kerak</h2>
+        <p>Shartsiz marketolog byudjetni qisqartirib, arzon auditoriyadan kam lid olib ham bonus olishi mumkin. Narx chiroyli ko'rinadi, lekin sotuv bo'limi kamroq lid bilan qoladi.</p>
+        <p>Shart bonusni hajm bilan bog'laydi: arzonlashtirish faqat yetarli lid kelgandagina hisobga olinadi.</p>
+        <button type="button" class="linkbtn" id="g-try">Shu holatni kalkulyatorda ko'rish</button>
+      </div>
+      <div class="compare">
+        <div class="cmp">
+          <h4>Odatdagi oy</h4>
+          <dl><div><dt>Byudjet</dt><dd>$10 000</dd></div><div><dt>Kval lid</dt><dd>2 500</dd></div><div><dt>CPQL</dt><dd>$4.00</dd></div></dl>
+          <div class="out"><span>Bonus</span><b class="mono">$0</b></div>
+        </div>
+        <div class="cmp">
+          <h4>Byudjet qisqartirilgan</h4>
+          <dl><div><dt>Byudjet</dt><dd>$2 000</dd></div><div><dt>Kval lid</dt><dd>1 000</dd></div><div><dt>CPQL</dt><dd>$2.00</dd></div></dl>
+          <div class="out"><span>Shartsiz <s class="mono">$1 000</s></span><span class="tag crit">Bloklanadi</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <details class="panel fact" id="fact">
+      <summary>
+        <div>
+          <h2>2026 fakti bo'yicha sinov</h2>
+          <p>Shu shart yanvar–avgustda amalda bo'lganida bonus qancha chiqardi.</p>
+        </div>
+        <span class="chev" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </summary>
+      <div class="fact-body">
+        <div class="tablewrap">
+          <table id="fact-t">
+            <thead><tr><th>Oy</th><th class="n hide-s">Reklama</th><th class="n">Kval lid</th><th class="n hide-s">Lid → kval</th><th class="n">CPQL to'liq</th><th class="n">Bonus</th></tr></thead>
+            <tbody></tbody>
+            <tfoot><tr><td>Jami</td><td class="n hide-s" id="f-ad"></td><td class="n" id="f-q"></td><td class="hide-s"></td><td></td><td class="n" id="f-bonus"></td></tr></tfoot>
+          </table>
+        </div>
+        <p class="fact-note">Collagen M hisobotidagi to'liq CPQL (marketingdan tashqari xarajatlar bilan). May→avgust xarajat +59% oshgan, kval lid esa 8% kamaygan; lid→kval 54.9% dan 36.9% ga tushgan. Muammo lid narxida emas, sifatida.</p>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    <p>Standart CPQL qaysi xarajatlarni o'z ichiga olsa, haqiqiy narxga ham aynan o'sha xarajatlar «Boshqa xarajatlar» maydoni orqali qo'shilishi kerak. Aks holda taqqoslash teng bo'lmaydi.</p>
+    <p>Lid narxi va CAC faqat reklama byudjetidan hisoblanadi. Kiritilgan qiymatlar shu brauzerda saqlanadi.</p>
+  </footer>
+</main>
+
+<div class="mbar" id="mbar" aria-hidden="true">
+  <div><div class="k">Marketolog bonusi</div><div class="v" id="m-bonus">$0</div></div>
+  <button type="button" id="m-go" tabindex="-1">Batafsil</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var IDS = ["i-std","i-share","i-min","i-budget","i-other","i-leads","i-q","i-tx","i-chek","i-kurs"];
+  var KEY = "tejamkorlik-v1";
+  var NB = "\u00a0";
+  var $ = function(id){ return document.getElementById(id); };
+
+  var PRESETS = {
+    "p-std":  {"i-budget":10000,"i-other":0,"i-leads":10000,"i-q":2500,"i-tx":500},
+    "p-good": {"i-budget":10000,"i-other":0,"i-leads":10000,"i-q":3333,"i-tx":667},
+    "p-cheat":{"i-budget":2000,"i-other":0,"i-leads":2000,"i-q":1000,"i-tx":200}
+  };
+
+  var FACT = [
+    ["Yanvar",4516.9,4327,1971,4.30],["Fevral",7555.0,6567,3645,3.10],["Mart",4819.0,8617,4727,2.10],
+    ["Aprel",13897.4,16423,7250,2.90],["May",15136.5,19412,9238,2.50],["Iyun",20335.8,20794,8969,3.30],
+    ["Iyul",24021.5,24232,8782,3.90],["Avgust",23994.8,22971,8479,4.10]
+  ];
+
+  function nf(n, d){
+    d = d || 0;
+    if (!isFinite(n)) return "—";
+    var s = Math.abs(n).toFixed(d);
+    var neg = n < 0 && Number(s) !== 0;
+    var p = s.split(".");
+    var i = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, NB);
+    return (neg ? "−" : "") + i + (p[1] ? "." + p[1] : "");
+  }
+  function usd(n, d){
+    if (!isFinite(n)) return "—";
+    var s = nf(Math.abs(n), d || 0);
+    var neg = n < 0 && Number(Math.abs(n).toFixed(d || 0)) !== 0;
+    return (neg ? "−" : "") + "$" + s;
+  }
+  function pct(n, d){ return isFinite(n) ? nf(n * 100, d == null ? 1 : d) + "%" : "—"; }
+  function trimPct(x){ return (x * 100).toFixed(2).replace(/\.?0+$/, "") + "%"; }
+
+  function parse(id){
+    var raw = String($(id).value || "").replace(/[\s\u00a0\u202f]/g, "").replace(",", ".");
+    var box = $(id).parentNode;
+    if (raw === "") { box.classList.remove("bad"); return 0; }
+    var v = Number(raw);
+    var ok = isFinite(v) && v >= 0;
+    box.classList.toggle("bad", !ok);
+    $(id).setAttribute("aria-invalid", ok ? "false" : "true");
+    return ok ? v : 0;
+  }
+  function read(){
+    return {
+      std: parse("i-std"), share: parse("i-share"), min: parse("i-min"),
+      budget: parse("i-budget"), other: parse("i-other"), leads: parse("i-leads"), q: parse("i-q"),
+      tx: parse("i-tx"), chek: parse("i-chek"), kurs: parse("i-kurs")
+    };
+  }
+
+  function calc(v){
+    var cost = v.budget + v.other;
+    var cpql = v.q > 0 ? cost / v.q : NaN;
+    var per = isFinite(cpql) ? v.std - cpql : NaN;
+    var total = isFinite(per) ? per * v.q : NaN;
+    var minBlock = v.min > 0 && v.q < v.min;
+    var eligible = isFinite(per) && per > 0 && !minBlock;
+    var bonus = eligible ? total * v.share / 100 : 0;
+    var company = isFinite(total) ? total - bonus : NaN;
+    return {cost:cost, cpql:cpql, per:per, total:total, minBlock:minBlock, eligible:eligible, bonus:bonus, company:company};
+  }
+
+  function setText(id, t){ var e = $(id); if (e.textContent !== t) e.textContent = t; }
+  function place(el, from, to, max){
+    var l = Math.max(0, from) / max * 100, w = Math.max(0, to - from) / max * 100;
+    el.style.left = l + "%"; el.style.width = w + "%";
+  }
+
+  function render(){
+    var v = read(), r = calc(v), share = v.share / 100;
+
+    setText("h-std", usd(v.std, 2));
+    setText("h-share", nf(v.share, v.share % 1 ? 1 : 0) + "%");
+
+    // status
+    var st = $("r-status"), stT = st.querySelector("span"), al = $("r-alert");
+    st.className = "pill"; al.className = "alert"; al.textContent = "";
+    if (!(v.q > 0)) {
+      stT.textContent = "Kval lid kiriting";
+    } else if (r.minBlock) {
+      st.classList.add("crit"); stT.textContent = "Hajm yetmadi";
+      al.classList.add("show","crit");
+      al.textContent = "Kval lid " + nf(v.q) + " ta, minimal shart " + nf(v.min) + " ta. Narx arzon bo'lsa ham bonus hisoblanmaydi.";
+    } else if (r.per <= 0.0049) {
+      if (r.per < -0.0049) {
+        st.classList.add("warn"); stT.textContent = "Standartdan qimmat";
+        al.classList.add("show","warn");
+        al.textContent = "Kval lid standartdan " + usd(-r.per, 2) + " qimmat tushdi. Bonus 0, jarima yo'q.";
+      } else { stT.textContent = "Standart darajada"; }
+    } else {
+      st.classList.add("good"); stT.textContent = "Bonus hisoblanadi";
+    }
+
+    // big
+    var b = Math.round(r.bonus);
+    setText("r-bonus", usd(b));
+    $("r-bonus").classList.toggle("zero", b === 0);
+    setText("r-bonus-uzs", "≈ " + nf(Math.round(r.bonus * v.kurs)) + " so'm" + (v.kurs ? " (kurs " + nf(v.kurs) + ")" : ""));
+    setText("m-bonus", usd(b));
+
+    // rows
+    setText("r-cpql", usd(r.cpql, 2));
+    setText("r-per", usd(r.per, 2)); $("r-per").classList.toggle("neg", r.per < -0.0049);
+    setText("r-total", usd(Math.round(r.total))); $("r-total").classList.toggle("neg", r.total < -0.5);
+    setText("r-share-l", "(" + nf(v.share, v.share % 1 ? 1 : 0) + "%)");
+    setText("r-bonus2", usd(b));
+    setText("r-company", usd(Math.round(r.company))); $("r-company").classList.toggle("neg", r.company < -0.5);
+
+    var sa = r.total > 0 ? Math.max(0, Math.min(1, r.bonus / r.total)) : 0;
+    $("s-a").style.width = (sa * 100) + "%";
+    $("s-b").style.width = (r.total > 0 ? (1 - sa) * 100 : 0) + "%";
+
+    // ruler
+    var cp = isFinite(r.cpql) ? r.cpql : 0;
+    var max = Math.max(v.std, cp, 0.01) * 1.1;
+    var perLeadBonus = r.eligible ? r.per * share : 0;
+    setText("g-cap", usd(cp, 2));
+    setText("g-max", usd(max, 2));
+    setText("g-std-l", "Standart " + usd(v.std, 2));
+    $("g-std").style.left = (v.std / max * 100) + "%";
+    $("g-std").classList.toggle("r", v.std / max > 0.62);
+    if (cp <= v.std) {
+      place($("g-cost"), 0, cp, max);
+      place($("g-bonus"), cp, cp + perLeadBonus, max);
+      place($("g-comp"), cp + perLeadBonus, v.std, max);
+      place($("g-over"), 0, 0, max);
+    } else {
+      place($("g-cost"), 0, v.std, max);
+      place($("g-bonus"), 0, 0, max);
+      place($("g-comp"), 0, 0, max);
+      place($("g-over"), v.std, cp, max);
+    }
+    var blocked = r.minBlock && r.per > 0;
+    $("g-comp").classList.toggle("blocked", blocked);
+    $("l-comp-sw").className = "sw " + (blocked ? "blocked" : "comp");
+    setText("l-comp-t", blocked ? "Tejam (shart bajarilmagan)" : "Kompaniyaga");
+    setText("l-cost-v", usd(Math.min(cp, v.std), 2));
+    setText("l-bonus-v", usd(perLeadBonus, 2));
+    setText("l-comp-v", usd(Math.max(0, r.per - perLeadBonus), 2));
+    setText("l-over-v", usd(Math.max(0, cp - v.std), 2));
+    $("l-over").hidden = !(cp > v.std + 0.0049);
+    $("l-bonus").hidden = blocked;
+
+    // funnel
+    var cac = v.tx > 0 ? v.budget / v.tx : NaN;
+    setText("x-lead", v.leads > 0 ? usd(v.budget / v.leads, 2) : "—");
+    setText("x-conv", v.leads > 0 ? pct(v.q / v.leads) : "—");
+    setText("x-cac", usd(cac, 2));
+    setText("x-share", v.chek > 0 && isFinite(cac) ? pct(cac * v.kurs / v.chek) : "—");
+
+    renderScen(v, r);
+    renderFact(v);
+    syncPresets();
+    save();
+  }
+
+  function renderScen(v, r){
+    setText("scen-sub", "Xarajat o'zgarmas (" + usd(r.cost) + "), kval lid narxi standartdan pasayib boradi.");
+    var rows = [], maxB = 0, cur = isFinite(r.cpql) ? r.cpql : NaN, curIdx = -1, best = Infinity;
+    for (var k = 0; k <= 6; k++) {
+      var drop = k / 16, cpql = v.std * (1 - drop);
+      var q = cpql > 0 ? r.cost / cpql : 0;
+      var tot = (v.std - cpql) * q;
+      var blocked = v.min > 0 && q < v.min && k > 0;
+      var bon = (!blocked && tot > 0) ? tot * v.share / 100 : 0;
+      maxB = Math.max(maxB, bon);
+      if (isFinite(cur) && Math.abs(cur - cpql) < best && Math.abs(cur - cpql) < v.std / 32) { best = Math.abs(cur - cpql); curIdx = k; }
+      rows.push({drop:drop, cpql:cpql, q:q, tot:tot, bon:bon, blocked:blocked});
+    }
+    var html = rows.map(function(x, i){
+      var w = maxB > 0 ? x.bon / maxB * 100 : 0, bb = Math.round(x.bon);
+      return "<tr" + (i === curIdx ? ' class="cur"' : "") + "><td>" + (i === 0 ? "Standart" : "−" + trimPct(x.drop)) +
+        "</td><td class=\"n\">" + usd(x.cpql, 2) + "</td><td class=\"n\">" + nf(Math.round(x.q)) +
+        "</td><td class=\"n hide-s\">" + usd(Math.round(x.tot)) + "</td><td class=\"n bonus-cell\"><div class=\"bc\">" +
+        (x.blocked ? '<span class="tag crit">hajm kam</span>' : '<span class="track2"><span style="width:' + w + '%"></span></span>' +
+        "<b" + (bb === 0 ? ' class="zero"' : "") + ">" + usd(bb) + "</b>") + "</div></td></tr>";
+    }).join("");
+    var tb = $("scen").tBodies[0];
+    if (tb.innerHTML !== html) tb.innerHTML = html;
+  }
+
+  function renderFact(v){
+    var sumAd = 0, sumQ = 0, sumB = 0, maxB = 0, out = [];
+    FACT.forEach(function(f){
+      var per = v.std - f[4], blocked = v.min > 0 && f[3] < v.min;
+      var bon = (per > 0.0049 && !blocked) ? Math.round(per * f[3] * v.share / 100) : 0;
+      sumAd += f[1]; sumQ += f[3]; sumB += bon; maxB = Math.max(maxB, bon);
+      out.push({f:f, per:per, blocked:blocked, bon:bon});
+    });
+    var html = out.map(function(o){
+      var f = o.f, w = maxB > 0 ? o.bon / maxB * 100 : 0, tag;
+      if (o.per <= 0.0049) tag = '<span class="tag warn">qimmat</span>';
+      else if (o.blocked) tag = '<span class="tag crit">hajm kam</span>';
+      else tag = '<span class="track2"><span style="width:' + w + '%"></span></span><b>' + usd(o.bon) + '</b>';
+      return "<tr><td>" + f[0] + "</td><td class=\"n hide-s\">" + usd(f[1]) + "</td><td class=\"n\">" + nf(f[3]) +
+        "</td><td class=\"n hide-s\">" + pct(f[3] / f[2]) + "</td><td class=\"n\">" + usd(f[4], 2) +
+        "</td><td class=\"n bonus-cell\"><div class=\"bc\">" + tag + "</div></td></tr>";
+    }).join("");
+    var tb = $("fact-t").tBodies[0];
+    if (tb.innerHTML !== html) tb.innerHTML = html;
+    setText("f-ad", usd(Math.round(sumAd)));
+    setText("f-q", nf(sumQ));
+    setText("f-bonus", usd(sumB));
+  }
+
+  function syncPresets(){
+    Object.keys(PRESETS).forEach(function(pid){
+      var p = PRESETS[pid], on = true;
+      Object.keys(p).forEach(function(id){ if (parse(id) !== p[id]) on = false; });
+      $(pid).setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+  function applyPreset(pid){
+    var p = PRESETS[pid];
+    Object.keys(p).forEach(function(id){ $(id).value = p[id]; });
+    render();
+  }
+
+  function save(){
+    try { var o = {}; IDS.forEach(function(id){ o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+  }
+  function load(){
+    try {
+      var o = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (o && typeof o === "object") IDS.forEach(function(id){ if (o[id] != null && o[id] !== "") $(id).value = o[id]; });
+    } catch (e) {}
+  }
+
+  load();
+  IDS.forEach(function(id){ $(id).addEventListener("input", render); });
+  Object.keys(PRESETS).forEach(function(pid){ $(pid).addEventListener("click", function(){ applyPreset(pid); }); });
+  $("g-try").addEventListener("click", function(){
+    applyPreset("p-cheat");
+    $("result").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+  });
+  $("m-go").addEventListener("click", function(){ $("result").scrollIntoView({behavior:"smooth", block:"start"}); });
+
+  try {
+    var mbar = $("mbar");
+    var io = new IntersectionObserver(function(es){
+      var vis = es[0].isIntersecting;
+      mbar.classList.toggle("show", !vis);
+      mbar.setAttribute("aria-hidden", vis ? "true" : "false");
+      $("m-go").tabIndex = vis ? -1 : 0;
+    }, {threshold: 0.15});
+    io.observe($("result"));
+  } catch (e) {}
+
+  render();
+})();
+</script>
+</body>
+</html>
