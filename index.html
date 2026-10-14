@@ -173,6 +173,7 @@ legend{font:600 17px/1.2 var(--f-head);letter-spacing:.005em;padding:0;margin-bo
 .extra h3{grid-column:1/-1;margin:0;font:600 14px/1.2 var(--f-head);color:var(--ink-2)}
 .kv .k{font-size:12.5px;color:var(--muted);margin-bottom:3px}
 .kv .v{font:500 17px/1.2 var(--f-mono);font-variant-numeric:tabular-nums}
+.fields .extra{grid-column:span 2;margin:0;padding:12px 16px 14px;border:1px solid var(--line);border-radius:10px;gap:10px 16px}
 
 /* ---------- Sections ---------- */
 section.block{margin-top:44px}
@@ -261,7 +262,7 @@ footer p{margin:0 0 6px;max-width:80ch}
   .hm{display:none}
   .fact-body{padding:0 12px 16px}
 }
-@media (max-width:360px){.fields{grid-template-columns:1fr}}
+@media (max-width:360px){.fields{grid-template-columns:1fr}.fields .extra{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -310,6 +311,13 @@ footer p{margin:0 0 6px;max-width:80ch}
           <div class="field"><label for="i-other">Boshqa xarajatlar</label><div class="inp"><span class="u pre">$</span><input id="i-other" inputmode="decimal" autocomplete="off" value="0"></div><span class="hint">Standartga kirgan xarajatlar</span></div>
           <div class="field"><label for="i-leads">Jami lid</label><div class="inp"><input id="i-leads" inputmode="numeric" autocomplete="off" value="10000"><span class="u">dona</span></div></div>
           <div class="field"><label for="i-q">Kval lid</label><div class="inp"><input id="i-q" inputmode="numeric" autocomplete="off" value="3333"><span class="u">dona</span></div></div>
+          <div class="extra">
+            <h3>Voronka</h3>
+            <div class="kv"><div class="k">Lid narxi</div><div class="v" id="x-lead">—</div></div>
+            <div class="kv"><div class="k">Lid → kval lid</div><div class="v" id="x-conv">—</div></div>
+            <div class="kv"><div class="k">CAC</div><div class="v" id="x-cac">—</div></div>
+            <div class="kv"><div class="k">Reklama ulushi chekda</div><div class="v" id="x-share">—</div></div>
+          </div>
         </div>
       </fieldset>
       <fieldset>
@@ -361,13 +369,6 @@ footer p{margin:0 0 6px;max-width:80ch}
         <div class="cap"><span>Marketolog</span><span>Kompaniya</span></div>
       </div>
 
-      <div class="extra">
-        <h3>Voronka</h3>
-        <div class="kv"><div class="k">Lid narxi</div><div class="v" id="x-lead">—</div></div>
-        <div class="kv"><div class="k">Lid → kval lid</div><div class="v" id="x-conv">—</div></div>
-        <div class="kv"><div class="k">CAC</div><div class="v" id="x-cac">—</div></div>
-        <div class="kv"><div class="k">Reklama ulushi chekda</div><div class="v" id="x-share">—</div></div>
-      </div>
     </aside>
   </div>
 
