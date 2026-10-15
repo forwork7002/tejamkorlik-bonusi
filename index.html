@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tejamkorlik bonusi</title>
-<meta name="description" content="Sinolife Collagen M marketologi uchun tejamkorlik bonusi kalkulyatori">
+<meta name="description" content="Sinolife Collagen M: marketolog va AI targetolog uchun bonus kalkulyatorlari">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -83,9 +83,10 @@ h1{font:700 clamp(40px,7vw,72px)/.95 var(--f-head);letter-spacing:-.02em;margin:
 
 /* ---------- Bo'limlar ---------- */
 .tabs{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;margin:0 0 24px;background:rgba(255,255,255,.07);border:1px solid var(--hero-line);border-radius:10px}
-.tabs a{color:var(--hero-muted);text-decoration:none;font:500 14px/1 var(--f-body);padding:9px 14px;border-radius:7px}
-.tabs a:hover{color:var(--hero-ink);background:rgba(255,255,255,.07)}
-.tabs a[aria-current="page"]{background:var(--hero-ink);color:var(--hero-bg)}
+.tabs button{appearance:none;border:0;background:transparent;cursor:pointer;color:var(--hero-muted);font:500 14px/1 var(--f-body);padding:9px 14px;border-radius:7px}
+.tabs button:hover{color:var(--hero-ink);background:rgba(255,255,255,.07)}
+.tabs button[aria-pressed="true"]{background:var(--hero-ink);color:var(--hero-bg)}
+[data-view][hidden]{display:none!important}
 
 /* ---------- Presets ---------- */
 .presets{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
@@ -288,7 +289,8 @@ footer p{margin:0 0 6px;max-width:80ch}
 <header class="top">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="tabs" aria-label="Bo'limlar"><a href="./" aria-current="page">Marketolog</a><a href="targetolog/">AI targetolog</a></nav>
+    <nav class="tabs" aria-label="Bo'limlar"><button type="button" data-go="m" aria-pressed="true">Marketolog</button><button type="button" data-go="t" aria-pressed="false">AI targetolog</button></nav>
+    <div data-view="m">
     <p class="kicker"><span class="dot" aria-hidden="true"></span>Sinolife, Collagen M marketologi uchun KPI</p>
     <h1>Tejamkorlik bonusi</h1>
     <p class="lead">Standart kval lid narxi <b id="h-std">$4.00</b>, barcha xarajatlar bilan. Marketolog narxni shundan arzonga tushirsa, har tejalgan dollarning <b id="h-share">50%</b> i unga bonus bo'ladi.</p>
@@ -306,10 +308,22 @@ footer p{margin:0 0 6px;max-width:80ch}
       </div>
     </div>
 
+    </div>
+    <div data-view="t" hidden>
+    <p class="kicker"><span class="dot" aria-hidden="true"></span>Sinolife, Collagen M targetologi uchun KPI</p>
+    <h1>AI targetolog bonusi</h1>
+    <p class="lead">Standart kval lid narxi <b id="t-h-std">$2.80</b>, forma va DM birga. Targetolog narxni shundan arzonga tushirsa, har tejalgan dollarning <b id="t-h-share">25%</b> i unga bonus bo'ladi.</p>
+    <div class="formula" aria-label="Formula">
+      <div class="fline"><span class="t res">Haqiqiy narx</span><span class="op">=</span><span class="op">(</span><span class="t">Forma byudjeti</span><span class="op">+</span><span class="t">DM byudjeti</span><span class="op">)</span><span class="op">÷</span><span class="op">(</span><span class="t">Kval lid</span><span class="op">+</span><span class="t">Kval lid DM</span><span class="op">)</span></div>
+      <div class="fline"><span class="t res">Bonus</span><span class="op">=</span><span class="op">(</span><span class="t">Standart narx</span><span class="op">−</span><span class="t">Haqiqiy narx</span><span class="op">)</span><span class="op">×</span><span class="t">Jami kval lid</span><span class="op">×</span><span class="t">Ulush</span></div>
+      <p class="fnote">Narx standartdan arzon bo'lmasa yoki jami kval lid minimaldan kam bo'lsa, bonus 0. Jarima yo'q.</p>
+    </div>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
+<div data-view="m">
   <div class="calc">
     <div class="panel inputs">
       <fieldset>
@@ -452,268 +466,625 @@ footer p{margin:0 0 6px;max-width:80ch}
     <p>Standart CPQL qaysi xarajatlarni o'z ichiga olsa, haqiqiy narxga ham aynan o'sha xarajatlar «Boshqa xarajatlar» maydoni orqali qo'shilishi kerak. Aks holda taqqoslash teng bo'lmaydi.</p>
     <p>Lid narxi va CAC faqat reklama byudjetidan hisoblanadi. Kiritilgan qiymatlar shu brauzerda saqlanadi.</p>
   </footer>
+</div>
+
+<div data-view="t" hidden>
+  <div class="calc">
+    <div class="panel inputs">
+      <fieldset>
+        <legend>Bonus sharti</legend>
+        <p class="legend-sub">Rahbar belgilaydi, oyma-oy o'zgarmaydi.</p>
+        <div class="fields">
+          <div class="field"><label for="t-i-std">Standart kval lid narxi</label><div class="inp"><span class="u pre">$</span><input id="t-i-std" inputmode="decimal" autocomplete="off" value="2.80"></div><span class="hint">Forma va DM uchun bitta</span></div>
+          <div class="field"><label for="t-i-share">Targetolog KPI ulushi</label><div class="inp"><input id="t-i-share" inputmode="decimal" autocomplete="off" value="25"><span class="u">%</span></div><span class="hint">Tejalgan summadan</span></div>
+          <div class="field"><label for="t-i-min">Minimal kval lid soni</label><div class="inp"><input id="t-i-min" inputmode="numeric" autocomplete="off" value="8500"><span class="u">dona</span></div><span class="hint">Forma + DM jami. 0 bo'lsa, shart o'chadi</span></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Forma</legend>
+        <p class="legend-sub">Lid-forma reklamasi bo'yicha oy natijasi.</p>
+        <div class="fields">
+          <div class="field"><label for="t-f-bud">Target reklama byudjeti</label><div class="inp"><span class="u pre">$</span><input id="t-f-bud" inputmode="decimal" autocomplete="off" value="20000"></div></div>
+          <div class="field"><label for="t-f-lead">Jami lid</label><div class="inp"><input id="t-f-lead" inputmode="numeric" autocomplete="off" value="19000"><span class="u">dona</span></div></div>
+          <div class="field"><label for="t-f-q">Kval lid</label><div class="inp"><input id="t-f-q" inputmode="numeric" autocomplete="off" value="7300"><span class="u">dona</span></div></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>DM</legend>
+        <p class="legend-sub">Direktga yozish reklamasi bo'yicha oy natijasi.</p>
+        <div class="fields">
+          <div class="field"><label for="t-d-bud">DM reklama byudjeti</label><div class="inp"><span class="u pre">$</span><input id="t-d-bud" inputmode="decimal" autocomplete="off" value="4000"></div></div>
+          <div class="field"><label for="t-d-msg">Murojaat soni</label><div class="inp"><input id="t-d-msg" inputmode="numeric" autocomplete="off" value="6500"><span class="u">dona</span></div></div>
+          <div class="field"><label for="t-d-lead">Lid DM</label><div class="inp"><input id="t-d-lead" inputmode="numeric" autocomplete="off" value="3200"><span class="u">dona</span></div></div>
+          <div class="field"><label for="t-d-q">Kval lid DM</label><div class="inp"><input id="t-d-q" inputmode="numeric" autocomplete="off" value="1900"><span class="u">dona</span></div></div>
+        </div>
+      </fieldset>
+    </div>
+
+    <aside class="panel result" id="t-result" aria-live="polite">
+      <div class="r-head"><h2>Targetolog bonusi</h2><span class="pill" id="t-r-status"><i></i><span>—</span></span></div>
+      <div class="big">
+        <div class="v" id="t-r-bonus">$0</div>
+        <div class="s" id="t-r-sub">—</div>
+      </div>
+      <div class="alert" id="t-r-alert" role="status"></div>
+
+      <div class="ruler" aria-label="Bitta kval lid narxining taqsimoti">
+        <div class="ruler-cap"><span>Bitta kval lid narxi</span><b id="t-g-cap">—</b></div>
+        <div class="track">
+          <div class="sg cost" id="t-g-cost"></div>
+          <div class="sg bonus" id="t-g-bonus"></div>
+          <div class="sg comp" id="t-g-comp"></div>
+          <div class="sg over" id="t-g-over"></div>
+          <div class="stdmark" id="t-g-std"><span id="t-g-std-l">Standart</span></div>
+        </div>
+        <div class="scale"><span>$0</span><span id="t-g-max">—</span></div>
+        <div class="legend">
+          <div class="lg" id="t-l-cost"><span class="sw cost"></span>Haqiqiy narx<span class="lv" id="t-l-cost-v">—</span></div>
+          <div class="lg" id="t-l-bonus"><span class="sw bonus"></span>Targetologga<span class="lv" id="t-l-bonus-v">—</span></div>
+          <div class="lg" id="t-l-comp"><span class="sw comp" id="t-l-comp-sw"></span><span id="t-l-comp-t">Kompaniyaga</span><span class="lv" id="t-l-comp-v">—</span></div>
+          <div class="lg" id="t-l-over" hidden><span class="sw over"></span>Standartdan ortiqcha<span class="lv" id="t-l-over-v">—</span></div>
+        </div>
+      </div>
+
+      <dl class="rows">
+        <div class="row"><dt>Jami byudjet</dt><dd id="t-r-bud">—</dd></div>
+        <div class="row"><dt>Jami kval lid</dt><dd id="t-r-q">—</dd></div>
+        <div class="row"><dt>Haqiqiy kval lid narxi</dt><dd id="t-r-price">—</dd></div>
+        <div class="row"><dt>1 liddan tejam</dt><dd id="t-r-per">—</dd></div>
+        <div class="row"><dt>Jami tejam</dt><dd id="t-r-total">—</dd></div>
+        <div class="row strong"><dt>Bonus <span class="muted" id="t-r-share-l">(25%)</span></dt><dd id="t-r-bonus2">—</dd></div>
+        <div class="row"><dt>Kompaniyada qoladi</dt><dd id="t-r-company">—</dd></div>
+      </dl>
+      <div class="split" aria-hidden="true">
+        <div class="bar"><span class="a" id="t-s-a" style="width:25%"></span><span class="b" id="t-s-b" style="width:75%"></span></div>
+        <div class="cap"><span>Targetolog</span><span>Kompaniya</span></div>
+      </div>
+      <div style="height:22px" aria-hidden="true"></div>
+    </aside>
+  </div>
+
+  <section class="block" aria-labelledby="t-chan-h">
+    <div class="sec-head">
+      <h2 id="t-chan-h">Kanallar bo'yicha</h2>
+      <p id="t-chan-sub">Bonusga ta'sir qilmaydi, qaysi kanal arzonroq kval lid berayotganini ko'rsatadi.</p>
+    </div>
+    <div class="panel tablewrap">
+      <table id="t-chan">
+        <thead><tr><th>Ko'rsatkich</th><th class="n">Forma</th><th class="n">DM</th><th class="n">Jami</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block notes">
+    <div class="panel note">
+      <h2>Nega kval lid narxidan</h2>
+      <p>Collagen M'da maydan avgustgacha reklama xarajati 59% oshdi, kval lid esa 8% kamaydi. Lid narxi deyarli o'zgarmagan ($0.78 → $1.04), lekin lid → kval lid martdagi 54.9% dan avgustda 36.9% ga tushgan.</p>
+      <p>Muammo lid narxida emas, sifatida. Oddiy lid narxidan bonus berilsa, targetolog arzon, ammo sifatsiz lid uchun ham mukofot oladi. Kval lid narxi esa sotuv bo'limiga yetib kelgan lidni o'lchaydi.</p>
+    </div>
+    <div class="panel note warn">
+      <h2>Bitta tejam uchun ikki bonus</h2>
+      <p>Marketolog ham kval lid narxi tejamidan 50% oladi. Ikkala bonus bir xil tejamdan hisoblansa, uning 75% i bonusga ketadi, kompaniyada 25% qoladi.</p>
+      <p>Variantlar: ulushlarni bo'lish (masalan, 30% + 25%) yoki marketologni to'liq xarajatli narxga, targetologni faqat reklama narxiga bog'lash. Qaror rahbarda.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Barcha boshlang'ich raqamlar namuna. Forma va ayniqsa DM bo'yicha haqiqiy oylik fakt kelgach almashtiriladi. Standart $2.80 va minimal 8 500 kval lid Collagen M avgust fakti asosida olingan taxmin.</p>
+    <p>Bonus faqat dollarda va faqat reklama byudjetidan hisoblanadi. Kiritilgan qiymatlar shu brauzerda saqlanadi.</p>
+  </footer>
+</div>
 </main>
 
 <div class="mbar" id="mbar" aria-hidden="true">
-  <div><div class="k">Marketolog bonusi</div><div class="v" id="m-bonus">$0</div></div>
+  <div><div class="k" id="m-label">Marketolog bonusi</div><div class="v" id="m-bonus">$0</div></div>
   <button type="button" id="m-go" tabindex="-1">Batafsil</button>
 </div>
 
 <script>
 (function(){
   "use strict";
-  var IDS = ["i-std","i-share","i-min","i-budget","i-other","i-leads","i-q","i-tx","i-chek","i-kurs"];
-  var KEY = "tejamkorlik-v1";
-  var NB = "\u00a0";
-  var $ = function(id){ return document.getElementById(id); };
-
-  var PRESETS = {
-    "p-std":  {"i-budget":10000,"i-other":0,"i-leads":10000,"i-q":2500,"i-tx":500},
-    "p-good": {"i-budget":10000,"i-other":0,"i-leads":10000,"i-q":3333,"i-tx":667},
-    "p-cheat":{"i-budget":2000,"i-other":0,"i-leads":2000,"i-q":1000,"i-tx":200}
-  };
-
-  var FACT = [
-    ["Yanvar",4516.9,4327,1971,4.30],["Fevral",7555.0,6567,3645,3.10],["Mart",4819.0,8617,4727,2.10],
-    ["Aprel",13897.4,16423,7250,2.90],["May",15136.5,19412,9238,2.50],["Iyun",20335.8,20794,8969,3.30],
-    ["Iyul",24021.5,24232,8782,3.90],["Avgust",23994.8,22971,8479,4.10]
-  ];
-
-  function nf(n, d){
-    d = d || 0;
-    if (!isFinite(n)) return "—";
-    var s = Math.abs(n).toFixed(d);
-    var neg = n < 0 && Number(s) !== 0;
-    var p = s.split(".");
-    var i = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, NB);
-    return (neg ? "−" : "") + i + (p[1] ? "." + p[1] : "");
+  var bars = {m:"$0", t:"$0"}, cur = "m";
+  function setBar(v, txt){
+    bars[v] = txt;
+    if (v === cur) { var e = document.getElementById("m-bonus"); if (e.textContent !== txt) e.textContent = txt; }
   }
-  function usd(n, d){
-    if (!isFinite(n)) return "—";
-    var s = nf(Math.abs(n), d || 0);
-    var neg = n < 0 && Number(Math.abs(n).toFixed(d || 0)) !== 0;
-    return (neg ? "−" : "") + "$" + s;
-  }
-  function pct(n, d){ return isFinite(n) ? nf(n * 100, d == null ? 1 : d) + "%" : "—"; }
-  function trimPct(x){ return (x * 100).toFixed(2).replace(/\.?0+$/, "") + "%"; }
 
-  function parse(id){
-    var raw = String($(id).value || "").replace(/[\s\u00a0\u202f]/g, "").replace(",", ".");
-    var box = $(id).parentNode;
-    if (raw === "") { box.classList.remove("bad"); return 0; }
-    var v = Number(raw);
-    var ok = isFinite(v) && v >= 0;
-    box.classList.toggle("bad", !ok);
-    $(id).setAttribute("aria-invalid", ok ? "false" : "true");
-    return ok ? v : 0;
-  }
-  function read(){
-    return {
-      std: parse("i-std"), share: parse("i-share"), min: parse("i-min"),
-      budget: parse("i-budget"), other: parse("i-other"), leads: parse("i-leads"), q: parse("i-q"),
-      tx: parse("i-tx"), chek: parse("i-chek"), kurs: parse("i-kurs")
+  // ===== Marketolog: tejamkorlik bonusi =====
+  (function(){
+    "use strict";
+    var IDS = ["i-std","i-share","i-min","i-budget","i-other","i-leads","i-q","i-tx","i-chek","i-kurs"];
+    var KEY = "tejamkorlik-v1";
+    var NB = "\u00a0";
+    var $ = function(id){ return document.getElementById(id); };
+
+    var PRESETS = {
+      "p-std":  {"i-budget":10000,"i-other":0,"i-leads":10000,"i-q":2500,"i-tx":500},
+      "p-good": {"i-budget":10000,"i-other":0,"i-leads":10000,"i-q":3333,"i-tx":667},
+      "p-cheat":{"i-budget":2000,"i-other":0,"i-leads":2000,"i-q":1000,"i-tx":200}
     };
-  }
 
-  function calc(v){
-    var cost = v.budget + v.other;
-    var cpql = v.q > 0 ? cost / v.q : NaN;
-    var per = isFinite(cpql) ? v.std - cpql : NaN;
-    var total = isFinite(per) ? per * v.q : NaN;
-    var minBlock = v.min > 0 && v.q < v.min;
-    var eligible = isFinite(per) && per > 0 && !minBlock;
-    var bonus = eligible ? total * v.share / 100 : 0;
-    var company = isFinite(total) ? total - bonus : NaN;
-    return {cost:cost, cpql:cpql, per:per, total:total, minBlock:minBlock, eligible:eligible, bonus:bonus, company:company};
-  }
+    var FACT = [
+      ["Yanvar",4516.9,4327,1971,4.30],["Fevral",7555.0,6567,3645,3.10],["Mart",4819.0,8617,4727,2.10],
+      ["Aprel",13897.4,16423,7250,2.90],["May",15136.5,19412,9238,2.50],["Iyun",20335.8,20794,8969,3.30],
+      ["Iyul",24021.5,24232,8782,3.90],["Avgust",23994.8,22971,8479,4.10]
+    ];
 
-  function setText(id, t){ var e = $(id); if (e.textContent !== t) e.textContent = t; }
-  function place(el, from, to, max){
-    var l = Math.max(0, from) / max * 100, w = Math.max(0, to - from) / max * 100;
-    el.style.left = l + "%"; el.style.width = w + "%";
-  }
+    function nf(n, d){
+      d = d || 0;
+      if (!isFinite(n)) return "—";
+      var s = Math.abs(n).toFixed(d);
+      var neg = n < 0 && Number(s) !== 0;
+      var p = s.split(".");
+      var i = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, NB);
+      return (neg ? "−" : "") + i + (p[1] ? "." + p[1] : "");
+    }
+    function usd(n, d){
+      if (!isFinite(n)) return "—";
+      var s = nf(Math.abs(n), d || 0);
+      var neg = n < 0 && Number(Math.abs(n).toFixed(d || 0)) !== 0;
+      return (neg ? "−" : "") + "$" + s;
+    }
+    function pct(n, d){ return isFinite(n) ? nf(n * 100, d == null ? 1 : d) + "%" : "—"; }
+    function trimPct(x){ return (x * 100).toFixed(2).replace(/\.?0+$/, "") + "%"; }
 
-  function render(){
-    var v = read(), r = calc(v), share = v.share / 100;
-
-    setText("h-std", usd(v.std, 2));
-    setText("h-share", nf(v.share, v.share % 1 ? 1 : 0) + "%");
-
-    // status
-    var st = $("r-status"), stT = st.querySelector("span"), al = $("r-alert");
-    st.className = "pill"; al.className = "alert"; al.textContent = "";
-    if (!(v.q > 0)) {
-      stT.textContent = "Kval lid kiriting";
-    } else if (r.minBlock) {
-      st.classList.add("crit"); stT.textContent = "Hajm yetmadi";
-      al.classList.add("show","crit");
-      al.textContent = "Kval lid " + nf(v.q) + " ta, minimal shart " + nf(v.min) + " ta. Narx arzon bo'lsa ham bonus hisoblanmaydi.";
-    } else if (r.per <= 0.0049) {
-      if (r.per < -0.0049) {
-        st.classList.add("warn"); stT.textContent = "Standartdan qimmat";
-        al.classList.add("show","warn");
-        al.textContent = "Kval lid standartdan " + usd(-r.per, 2) + " qimmat tushdi. Bonus 0, jarima yo'q.";
-      } else { stT.textContent = "Standart darajada"; }
-    } else {
-      st.classList.add("good"); stT.textContent = "Bonus hisoblanadi";
+    function parse(id){
+      var raw = String($(id).value || "").replace(/[\s\u00a0\u202f]/g, "").replace(",", ".");
+      var box = $(id).parentNode;
+      if (raw === "") { box.classList.remove("bad"); return 0; }
+      var v = Number(raw);
+      var ok = isFinite(v) && v >= 0;
+      box.classList.toggle("bad", !ok);
+      $(id).setAttribute("aria-invalid", ok ? "false" : "true");
+      return ok ? v : 0;
+    }
+    function read(){
+      return {
+        std: parse("i-std"), share: parse("i-share"), min: parse("i-min"),
+        budget: parse("i-budget"), other: parse("i-other"), leads: parse("i-leads"), q: parse("i-q"),
+        tx: parse("i-tx"), chek: parse("i-chek"), kurs: parse("i-kurs")
+      };
     }
 
-    // big
-    var b = Math.round(r.bonus);
-    setText("r-bonus", usd(b));
-    $("r-bonus").classList.toggle("zero", b === 0);
-    setText("r-bonus-uzs", "≈ " + nf(Math.round(r.bonus * v.kurs)) + " so'm" + (v.kurs ? " (kurs " + nf(v.kurs) + ")" : ""));
-    setText("m-bonus", usd(b));
-
-    // rows
-    setText("r-cpql", usd(r.cpql, 2));
-    setText("r-per", usd(r.per, 2)); $("r-per").classList.toggle("neg", r.per < -0.0049);
-    setText("r-total", usd(Math.round(r.total))); $("r-total").classList.toggle("neg", r.total < -0.5);
-    setText("r-share-l", "(" + nf(v.share, v.share % 1 ? 1 : 0) + "%)");
-    setText("r-bonus2", usd(b));
-    setText("r-company", usd(Math.round(r.company))); $("r-company").classList.toggle("neg", r.company < -0.5);
-
-    var sa = r.total > 0 ? Math.max(0, Math.min(1, r.bonus / r.total)) : 0;
-    $("s-a").style.width = (sa * 100) + "%";
-    $("s-b").style.width = (r.total > 0 ? (1 - sa) * 100 : 0) + "%";
-
-    // ruler
-    var cp = isFinite(r.cpql) ? r.cpql : 0;
-    var max = Math.max(v.std, cp, 0.01) * 1.1;
-    var perLeadBonus = r.eligible ? r.per * share : 0;
-    setText("g-cap", usd(cp, 2));
-    setText("g-max", usd(max, 2));
-    setText("g-std-l", "Standart " + usd(v.std, 2));
-    $("g-std").style.left = (v.std / max * 100) + "%";
-    $("g-std").classList.toggle("r", v.std / max > 0.62);
-    if (cp <= v.std) {
-      place($("g-cost"), 0, cp, max);
-      place($("g-bonus"), cp, cp + perLeadBonus, max);
-      place($("g-comp"), cp + perLeadBonus, v.std, max);
-      place($("g-over"), 0, 0, max);
-    } else {
-      place($("g-cost"), 0, v.std, max);
-      place($("g-bonus"), 0, 0, max);
-      place($("g-comp"), 0, 0, max);
-      place($("g-over"), v.std, cp, max);
+    function calc(v){
+      var cost = v.budget + v.other;
+      var cpql = v.q > 0 ? cost / v.q : NaN;
+      var per = isFinite(cpql) ? v.std - cpql : NaN;
+      var total = isFinite(per) ? per * v.q : NaN;
+      var minBlock = v.min > 0 && v.q < v.min;
+      var eligible = isFinite(per) && per > 0 && !minBlock;
+      var bonus = eligible ? total * v.share / 100 : 0;
+      var company = isFinite(total) ? total - bonus : NaN;
+      return {cost:cost, cpql:cpql, per:per, total:total, minBlock:minBlock, eligible:eligible, bonus:bonus, company:company};
     }
-    var blocked = r.minBlock && r.per > 0;
-    $("g-comp").classList.toggle("blocked", blocked);
-    $("l-comp-sw").className = "sw " + (blocked ? "blocked" : "comp");
-    setText("l-comp-t", blocked ? "Tejam (shart bajarilmagan)" : "Kompaniyaga");
-    setText("l-cost-v", usd(Math.min(cp, v.std), 2));
-    setText("l-bonus-v", usd(perLeadBonus, 2));
-    setText("l-comp-v", usd(Math.max(0, r.per - perLeadBonus), 2));
-    setText("l-over-v", usd(Math.max(0, cp - v.std), 2));
-    $("l-over").hidden = !(cp > v.std + 0.0049);
-    $("l-bonus").hidden = blocked;
 
-    // funnel
-    var cac = v.tx > 0 ? v.budget / v.tx : NaN;
-    setText("x-lead", v.leads > 0 ? usd(v.budget / v.leads, 2) : "—");
-    setText("x-conv", v.leads > 0 ? pct(v.q / v.leads) : "—");
-    setText("x-cac", usd(cac, 2));
-    setText("x-share", v.chek > 0 && isFinite(cac) ? pct(cac * v.kurs / v.chek) : "—");
-
-    renderScen(v, r);
-    renderFact(v);
-    syncPresets();
-    save();
-  }
-
-  function renderScen(v, r){
-    setText("scen-sub", "Xarajat o'zgarmas (" + usd(r.cost) + "), kval lid narxi standartdan pasayib boradi.");
-    var rows = [], maxB = 0, cur = isFinite(r.cpql) ? r.cpql : NaN, curIdx = -1, best = Infinity;
-    for (var k = 0; k <= 6; k++) {
-      var drop = k / 16, cpql = v.std * (1 - drop);
-      var q = cpql > 0 ? r.cost / cpql : 0;
-      var tot = (v.std - cpql) * q;
-      var blocked = v.min > 0 && q < v.min && k > 0;
-      var bon = (!blocked && tot > 0) ? tot * v.share / 100 : 0;
-      maxB = Math.max(maxB, bon);
-      if (isFinite(cur) && Math.abs(cur - cpql) < best && Math.abs(cur - cpql) < v.std / 32) { best = Math.abs(cur - cpql); curIdx = k; }
-      rows.push({drop:drop, cpql:cpql, q:q, tot:tot, bon:bon, blocked:blocked});
+    function setText(id, t){ var e = $(id); if (e.textContent !== t) e.textContent = t; }
+    function place(el, from, to, max){
+      var l = Math.max(0, from) / max * 100, w = Math.max(0, to - from) / max * 100;
+      el.style.left = l + "%"; el.style.width = w + "%";
     }
-    var html = rows.map(function(x, i){
-      var w = maxB > 0 ? x.bon / maxB * 100 : 0, bb = Math.round(x.bon);
-      return "<tr" + (i === curIdx ? ' class="cur"' : "") + "><td>" + (i === 0 ? "Standart" : "−" + trimPct(x.drop)) +
-        "</td><td class=\"n\">" + usd(x.cpql, 2) + "</td><td class=\"n\">" + nf(Math.round(x.q)) +
-        "</td><td class=\"n hide-s\">" + usd(Math.round(x.tot)) + "</td><td class=\"n bonus-cell\"><div class=\"bc\">" +
-        (x.blocked ? '<span class="tag crit">hajm kam</span>' : '<span class="track2"><span style="width:' + w + '%"></span></span>' +
-        "<b" + (bb === 0 ? ' class="zero"' : "") + ">" + usd(bb) + "</b>") + "</div></td></tr>";
-    }).join("");
-    var tb = $("scen").tBodies[0];
-    if (tb.innerHTML !== html) tb.innerHTML = html;
-  }
 
-  function renderFact(v){
-    var sumAd = 0, sumQ = 0, sumB = 0, maxB = 0, out = [];
-    FACT.forEach(function(f){
-      var per = v.std - f[4], blocked = v.min > 0 && f[3] < v.min;
-      var bon = (per > 0.0049 && !blocked) ? Math.round(per * f[3] * v.share / 100) : 0;
-      sumAd += f[1]; sumQ += f[3]; sumB += bon; maxB = Math.max(maxB, bon);
-      out.push({f:f, per:per, blocked:blocked, bon:bon});
+    function render(){
+      var v = read(), r = calc(v), share = v.share / 100;
+
+      setText("h-std", usd(v.std, 2));
+      setText("h-share", nf(v.share, v.share % 1 ? 1 : 0) + "%");
+
+      // status
+      var st = $("r-status"), stT = st.querySelector("span"), al = $("r-alert");
+      st.className = "pill"; al.className = "alert"; al.textContent = "";
+      if (!(v.q > 0)) {
+        stT.textContent = "Kval lid kiriting";
+      } else if (r.minBlock) {
+        st.classList.add("crit"); stT.textContent = "Hajm yetmadi";
+        al.classList.add("show","crit");
+        al.textContent = "Kval lid " + nf(v.q) + " ta, minimal shart " + nf(v.min) + " ta. Narx arzon bo'lsa ham bonus hisoblanmaydi.";
+      } else if (r.per <= 0.0049) {
+        if (r.per < -0.0049) {
+          st.classList.add("warn"); stT.textContent = "Standartdan qimmat";
+          al.classList.add("show","warn");
+          al.textContent = "Kval lid standartdan " + usd(-r.per, 2) + " qimmat tushdi. Bonus 0, jarima yo'q.";
+        } else { stT.textContent = "Standart darajada"; }
+      } else {
+        st.classList.add("good"); stT.textContent = "Bonus hisoblanadi";
+      }
+
+      // big
+      var b = Math.round(r.bonus);
+      setText("r-bonus", usd(b));
+      $("r-bonus").classList.toggle("zero", b === 0);
+      setText("r-bonus-uzs", "≈ " + nf(Math.round(r.bonus * v.kurs)) + " so'm" + (v.kurs ? " (kurs " + nf(v.kurs) + ")" : ""));
+      setBar("m", usd(b));
+
+      // rows
+      setText("r-cpql", usd(r.cpql, 2));
+      setText("r-per", usd(r.per, 2)); $("r-per").classList.toggle("neg", r.per < -0.0049);
+      setText("r-total", usd(Math.round(r.total))); $("r-total").classList.toggle("neg", r.total < -0.5);
+      setText("r-share-l", "(" + nf(v.share, v.share % 1 ? 1 : 0) + "%)");
+      setText("r-bonus2", usd(b));
+      setText("r-company", usd(Math.round(r.company))); $("r-company").classList.toggle("neg", r.company < -0.5);
+
+      var sa = r.total > 0 ? Math.max(0, Math.min(1, r.bonus / r.total)) : 0;
+      $("s-a").style.width = (sa * 100) + "%";
+      $("s-b").style.width = (r.total > 0 ? (1 - sa) * 100 : 0) + "%";
+
+      // ruler
+      var cp = isFinite(r.cpql) ? r.cpql : 0;
+      var max = Math.max(v.std, cp, 0.01) * 1.1;
+      var perLeadBonus = r.eligible ? r.per * share : 0;
+      setText("g-cap", usd(cp, 2));
+      setText("g-max", usd(max, 2));
+      setText("g-std-l", "Standart " + usd(v.std, 2));
+      $("g-std").style.left = (v.std / max * 100) + "%";
+      $("g-std").classList.toggle("r", v.std / max > 0.62);
+      if (cp <= v.std) {
+        place($("g-cost"), 0, cp, max);
+        place($("g-bonus"), cp, cp + perLeadBonus, max);
+        place($("g-comp"), cp + perLeadBonus, v.std, max);
+        place($("g-over"), 0, 0, max);
+      } else {
+        place($("g-cost"), 0, v.std, max);
+        place($("g-bonus"), 0, 0, max);
+        place($("g-comp"), 0, 0, max);
+        place($("g-over"), v.std, cp, max);
+      }
+      var blocked = r.minBlock && r.per > 0;
+      $("g-comp").classList.toggle("blocked", blocked);
+      $("l-comp-sw").className = "sw " + (blocked ? "blocked" : "comp");
+      setText("l-comp-t", blocked ? "Tejam (shart bajarilmagan)" : "Kompaniyaga");
+      setText("l-cost-v", usd(Math.min(cp, v.std), 2));
+      setText("l-bonus-v", usd(perLeadBonus, 2));
+      setText("l-comp-v", usd(Math.max(0, r.per - perLeadBonus), 2));
+      setText("l-over-v", usd(Math.max(0, cp - v.std), 2));
+      $("l-over").hidden = !(cp > v.std + 0.0049);
+      $("l-bonus").hidden = blocked;
+
+      // funnel
+      var cac = v.tx > 0 ? v.budget / v.tx : NaN;
+      setText("x-lead", v.leads > 0 ? usd(v.budget / v.leads, 2) : "—");
+      setText("x-conv", v.leads > 0 ? pct(v.q / v.leads) : "—");
+      setText("x-cac", usd(cac, 2));
+      setText("x-share", v.chek > 0 && isFinite(cac) ? pct(cac * v.kurs / v.chek) : "—");
+
+      renderScen(v, r);
+      renderFact(v);
+      syncPresets();
+      save();
+    }
+
+    function renderScen(v, r){
+      setText("scen-sub", "Xarajat o'zgarmas (" + usd(r.cost) + "), kval lid narxi standartdan pasayib boradi.");
+      var rows = [], maxB = 0, cur = isFinite(r.cpql) ? r.cpql : NaN, curIdx = -1, best = Infinity;
+      for (var k = 0; k <= 6; k++) {
+        var drop = k / 16, cpql = v.std * (1 - drop);
+        var q = cpql > 0 ? r.cost / cpql : 0;
+        var tot = (v.std - cpql) * q;
+        var blocked = v.min > 0 && q < v.min && k > 0;
+        var bon = (!blocked && tot > 0) ? tot * v.share / 100 : 0;
+        maxB = Math.max(maxB, bon);
+        if (isFinite(cur) && Math.abs(cur - cpql) < best && Math.abs(cur - cpql) < v.std / 32) { best = Math.abs(cur - cpql); curIdx = k; }
+        rows.push({drop:drop, cpql:cpql, q:q, tot:tot, bon:bon, blocked:blocked});
+      }
+      var html = rows.map(function(x, i){
+        var w = maxB > 0 ? x.bon / maxB * 100 : 0, bb = Math.round(x.bon);
+        return "<tr" + (i === curIdx ? ' class="cur"' : "") + "><td>" + (i === 0 ? "Standart" : "−" + trimPct(x.drop)) +
+          "</td><td class=\"n\">" + usd(x.cpql, 2) + "</td><td class=\"n\">" + nf(Math.round(x.q)) +
+          "</td><td class=\"n hide-s\">" + usd(Math.round(x.tot)) + "</td><td class=\"n bonus-cell\"><div class=\"bc\">" +
+          (x.blocked ? '<span class="tag crit">hajm kam</span>' : '<span class="track2"><span style="width:' + w + '%"></span></span>' +
+          "<b" + (bb === 0 ? ' class="zero"' : "") + ">" + usd(bb) + "</b>") + "</div></td></tr>";
+      }).join("");
+      var tb = $("scen").tBodies[0];
+      if (tb.innerHTML !== html) tb.innerHTML = html;
+    }
+
+    function renderFact(v){
+      var sumAd = 0, sumQ = 0, sumB = 0, maxB = 0, out = [];
+      FACT.forEach(function(f){
+        var per = v.std - f[4], blocked = v.min > 0 && f[3] < v.min;
+        var bon = (per > 0.0049 && !blocked) ? Math.round(per * f[3] * v.share / 100) : 0;
+        sumAd += f[1]; sumQ += f[3]; sumB += bon; maxB = Math.max(maxB, bon);
+        out.push({f:f, per:per, blocked:blocked, bon:bon});
+      });
+      var html = out.map(function(o){
+        var f = o.f, w = maxB > 0 ? o.bon / maxB * 100 : 0, tag;
+        if (o.per <= 0.0049) tag = '<span class="tag warn">qimmat</span>';
+        else if (o.blocked) tag = '<span class="tag crit">hajm kam</span>';
+        else tag = '<span class="track2"><span style="width:' + w + '%"></span></span><b>' + usd(o.bon) + '</b>';
+        return "<tr><td>" + f[0] + "</td><td class=\"n hide-s\">" + usd(f[1]) + "</td><td class=\"n\">" + nf(f[3]) +
+          "</td><td class=\"n hide-s\">" + pct(f[3] / f[2]) + "</td><td class=\"n\">" + usd(f[4], 2) +
+          "</td><td class=\"n bonus-cell\"><div class=\"bc\">" + tag + "</div></td></tr>";
+      }).join("");
+      var tb = $("fact-t").tBodies[0];
+      if (tb.innerHTML !== html) tb.innerHTML = html;
+      setText("f-ad", usd(Math.round(sumAd)));
+      setText("f-q", nf(sumQ));
+      setText("f-bonus", usd(sumB));
+    }
+
+    function syncPresets(){
+      Object.keys(PRESETS).forEach(function(pid){
+        var p = PRESETS[pid], on = true;
+        Object.keys(p).forEach(function(id){ if (parse(id) !== p[id]) on = false; });
+        $(pid).setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+    function applyPreset(pid){
+      var p = PRESETS[pid];
+      Object.keys(p).forEach(function(id){ $(id).value = p[id]; });
+      render();
+    }
+
+    function save(){
+      try { var o = {}; IDS.forEach(function(id){ o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+    }
+    function load(){
+      try {
+        var o = JSON.parse(localStorage.getItem(KEY) || "null");
+        if (o && typeof o === "object") IDS.forEach(function(id){ if (o[id] != null && o[id] !== "") $(id).value = o[id]; });
+      } catch (e) {}
+    }
+
+    load();
+    IDS.forEach(function(id){ $(id).addEventListener("input", render); });
+    Object.keys(PRESETS).forEach(function(pid){ $(pid).addEventListener("click", function(){ applyPreset(pid); }); });
+    $("g-try").addEventListener("click", function(){
+      applyPreset("p-cheat");
+      $("result").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
     });
-    var html = out.map(function(o){
-      var f = o.f, w = maxB > 0 ? o.bon / maxB * 100 : 0, tag;
-      if (o.per <= 0.0049) tag = '<span class="tag warn">qimmat</span>';
-      else if (o.blocked) tag = '<span class="tag crit">hajm kam</span>';
-      else tag = '<span class="track2"><span style="width:' + w + '%"></span></span><b>' + usd(o.bon) + '</b>';
-      return "<tr><td>" + f[0] + "</td><td class=\"n hide-s\">" + usd(f[1]) + "</td><td class=\"n\">" + nf(f[3]) +
-        "</td><td class=\"n hide-s\">" + pct(f[3] / f[2]) + "</td><td class=\"n\">" + usd(f[4], 2) +
-        "</td><td class=\"n bonus-cell\"><div class=\"bc\">" + tag + "</div></td></tr>";
-    }).join("");
-    var tb = $("fact-t").tBodies[0];
-    if (tb.innerHTML !== html) tb.innerHTML = html;
-    setText("f-ad", usd(Math.round(sumAd)));
-    setText("f-q", nf(sumQ));
-    setText("f-bonus", usd(sumB));
-  }
 
-  function syncPresets(){
-    Object.keys(PRESETS).forEach(function(pid){
-      var p = PRESETS[pid], on = true;
-      Object.keys(p).forEach(function(id){ if (parse(id) !== p[id]) on = false; });
-      $(pid).setAttribute("aria-pressed", on ? "true" : "false");
-    });
-  }
-  function applyPreset(pid){
-    var p = PRESETS[pid];
-    Object.keys(p).forEach(function(id){ $(id).value = p[id]; });
+
     render();
-  }
+  })();
 
-  function save(){
-    try { var o = {}; IDS.forEach(function(id){ o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
-  }
-  function load(){
+  // ===== AI targetolog bonusi (id lar "t-" bilan) =====
+  (function(){
+    "use strict";
+    var IDS = ["i-std","i-share","i-min","f-bud","f-lead","f-q","d-bud","d-msg","d-lead","d-q"];
+    var KEY = "targetolog-bonus-v2";
+    var NB = " ";
+    var $ = function(id){ return document.getElementById("t-" + id); };
+
+    function nf(n, d){
+      d = d || 0;
+      if (!isFinite(n)) return "—";
+      var s = Math.abs(n).toFixed(d);
+      var neg = n < 0 && Number(s) !== 0;
+      var p = s.split(".");
+      var i = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, NB);
+      return (neg ? "−" : "") + i + (p[1] ? "." + p[1] : "");
+    }
+    function usd(n, d){
+      if (!isFinite(n)) return "—";
+      var s = nf(Math.abs(n), d || 0);
+      var neg = n < 0 && Number(Math.abs(n).toFixed(d || 0)) !== 0;
+      return (neg ? "−" : "") + "$" + s;
+    }
+    function pct(n, d){ return isFinite(n) ? nf(n * 100, d == null ? 1 : d) + "%" : "—"; }
+    function div(a, b){ return b > 0 ? a / b : NaN; }
+
+    function parse(id){
+      var raw = String($(id).value || "").replace(/[\s  ]/g, "").replace(",", ".");
+      var box = $(id).parentNode;
+      if (raw === "") { box.classList.remove("bad"); return 0; }
+      var v = Number(raw);
+      var ok = isFinite(v) && v >= 0;
+      box.classList.toggle("bad", !ok);
+      $(id).setAttribute("aria-invalid", ok ? "false" : "true");
+      return ok ? v : 0;
+    }
+    function read(){
+      return {
+        std: parse("i-std"), share: parse("i-share"), min: parse("i-min"),
+        fb: parse("f-bud"), fl: parse("f-lead"), fq: parse("f-q"),
+        db: parse("d-bud"), dm: parse("d-msg"), dl: parse("d-lead"), dq: parse("d-q")
+      };
+    }
+
+    function calc(v){
+      var bud = v.fb + v.db, q = v.fq + v.dq, lead = v.fl + v.dl;
+      var price = div(bud, q);
+      var per = isFinite(price) ? v.std - price : NaN;
+      var total = isFinite(per) ? Math.max(0, per * q) : NaN;
+      var minBlock = v.min > 0 && q < v.min;
+      var eligible = isFinite(per) && per > 0 && !minBlock;
+      var bonus = eligible ? total * v.share / 100 : 0;
+      var company = isFinite(total) ? total - bonus : NaN;
+      return {bud:bud, q:q, lead:lead, price:price, per:per, total:total, minBlock:minBlock, eligible:eligible, bonus:bonus, company:company};
+    }
+
+    function setText(id, t){ var e = $(id); if (e.textContent !== t) e.textContent = t; }
+    function place(el, from, to, max){
+      var l = Math.max(0, from) / max * 100, w = Math.max(0, to - from) / max * 100;
+      el.style.left = l + "%"; el.style.width = w + "%";
+    }
+
+    function render(){
+      var v = read(), r = calc(v), share = v.share / 100;
+      var shareTxt = nf(v.share, v.share % 1 ? 1 : 0) + "%";
+
+      setText("h-std", usd(v.std, 2));
+      setText("h-share", shareTxt);
+
+      // holat
+      var st = $("r-status"), stT = st.querySelector("span"), al = $("r-alert");
+      st.className = "pill"; al.className = "alert"; al.textContent = "";
+      if (!(r.q > 0)) {
+        stT.textContent = "Kval lid kiriting";
+      } else if (r.minBlock) {
+        st.classList.add("crit"); stT.textContent = "Hajm yetmadi";
+        al.classList.add("show","crit");
+        al.textContent = "Jami kval lid (forma + DM) " + nf(r.q) + " ta, minimal shart " + nf(v.min) + " ta. Narx arzon bo'lsa ham bonus hisoblanmaydi.";
+      } else if (r.per <= 0.0049) {
+        if (r.per < -0.0049) {
+          st.classList.add("warn"); stT.textContent = "Standartdan qimmat";
+          al.classList.add("show","warn");
+          al.textContent = "Kval lid standartdan " + usd(-r.per, 2) + " qimmat tushdi. Bonus 0, jarima yo'q.";
+        } else { stT.textContent = "Standart darajada"; }
+      } else {
+        st.classList.add("good"); stT.textContent = "Bonus hisoblanadi";
+      }
+
+      // katta raqam
+      var b = Math.round(r.bonus);
+      setText("r-bonus", usd(b));
+      $("r-bonus").classList.toggle("zero", b === 0);
+      setText("r-sub", "Haqiqiy narx " + usd(r.price, 2) + " · standart " + usd(v.std, 2));
+      setBar("t", usd(b));
+
+      // qatorlar
+      setText("r-bud", usd(r.bud));
+      setText("r-q", nf(r.q));
+      setText("r-price", usd(r.price, 2));
+      setText("r-per", usd(r.per, 2)); $("r-per").classList.toggle("neg", r.per < -0.0049);
+      setText("r-total", usd(Math.round(r.total)));
+      setText("r-share-l", "(" + shareTxt + ")");
+      setText("r-bonus2", usd(b));
+      setText("r-company", usd(Math.round(r.company)));
+
+      var sa = r.total > 0 ? Math.max(0, Math.min(1, r.bonus / r.total)) : 0;
+      $("s-a").style.width = (sa * 100) + "%";
+      $("s-b").style.width = (r.total > 0 ? (1 - sa) * 100 : 0) + "%";
+
+      // chizg'ich
+      var cp = isFinite(r.price) ? r.price : 0;
+      var max = Math.max(v.std, cp, 0.01) * 1.1;
+      var perLeadBonus = r.eligible ? r.per * share : 0;
+      setText("g-cap", usd(cp, 2));
+      setText("g-max", usd(max, 2));
+      setText("g-std-l", "Standart " + usd(v.std, 2));
+      $("g-std").style.left = (v.std / max * 100) + "%";
+      $("g-std").classList.toggle("r", v.std / max > 0.62);
+      if (cp <= v.std) {
+        place($("g-cost"), 0, cp, max);
+        place($("g-bonus"), cp, cp + perLeadBonus, max);
+        place($("g-comp"), cp + perLeadBonus, v.std, max);
+        place($("g-over"), 0, 0, max);
+      } else {
+        place($("g-cost"), 0, v.std, max);
+        place($("g-bonus"), 0, 0, max);
+        place($("g-comp"), 0, 0, max);
+        place($("g-over"), v.std, cp, max);
+      }
+      var blocked = r.minBlock && r.per > 0;
+      $("g-comp").classList.toggle("blocked", blocked);
+      $("l-comp-sw").className = "sw " + (blocked ? "blocked" : "comp");
+      setText("l-comp-t", blocked ? "Tejam (shart bajarilmagan)" : "Kompaniyaga");
+      setText("l-cost-v", usd(Math.min(cp, v.std), 2));
+      setText("l-bonus-v", usd(perLeadBonus, 2));
+      setText("l-comp-v", usd(Math.max(0, r.per - perLeadBonus), 2));
+      setText("l-over-v", usd(Math.max(0, cp - v.std), 2));
+      $("l-over").hidden = !(cp > v.std + 0.0049);
+      $("l-bonus").hidden = blocked;
+
+      renderChan(v, r);
+      save();
+    }
+
+    function renderChan(v, r){
+      var ch = [
+        {bud:v.fb, msg:NaN, lead:v.fl, q:v.fq},
+        {bud:v.db, msg:v.dm, lead:v.dl, q:v.dq},
+        {bud:r.bud, msg:NaN, lead:r.lead, q:r.q}
+      ];
+      var fp = div(v.fb, v.fq), dp = div(v.db, v.dq);
+      var cheap = (isFinite(fp) && isFinite(dp) && Math.abs(fp - dp) >= 0.005) ? (fp < dp ? 0 : 1) : -1;
+      var rows = [
+        ["Byudjet",         function(c){ return usd(c.bud); }],
+        ["Murojaat",        function(c){ return nf(c.msg); }],
+        ["Lid",             function(c){ return nf(c.lead); }],
+        ["Kval lid",        function(c){ return nf(c.q); }],
+        ["Murojaat → lid",  function(c){ return pct(div(c.lead, c.msg)); }],
+        ["Lid → kval lid",  function(c){ return pct(div(c.q, c.lead)); }],
+        ["Murojaat narxi",  function(c){ return usd(div(c.bud, c.msg), 2); }],
+        ["Lid narxi",       function(c){ return usd(div(c.bud, c.lead), 2); }],
+        ["Kval lid narxi",  function(c){ return usd(div(c.bud, c.q), 2); }, true],
+        ["Kval lid ulushi", function(c){ return pct(div(c.q, r.q)); }]
+      ];
+      var html = rows.map(function(row){
+        var hl = row[2] === true;
+        var cells = ch.map(function(c, i){
+          var good = hl && i === cheap;
+          return "<td class=\"n" + (good ? " good" : "") + "\">" +
+            (good ? '<span class="tag good hide-s">arzonroq</span> ' : "") + row[1](c) + "</td>";
+        }).join("");
+        return "<tr" + (hl ? ' class="hl"' : "") + "><td>" + row[0] + "</td>" + cells + "</tr>";
+      }).join("");
+      var tb = $("chan").tBodies[0];
+      if (tb.innerHTML !== html) tb.innerHTML = html;
+
+      var sub = "Bonusga ta'sir qilmaydi, qaysi kanal arzonroq kval lid berayotganini ko'rsatadi.";
+      if (cheap !== -1) {
+        sub = (cheap === 1 ? "DM" : "Forma") + " kval lidi " + usd(Math.abs(fp - dp), 2) + " arzonroq. Bonusga ta'sir qilmaydi: bonus jami narxdan hisoblanadi.";
+      }
+      setText("chan-sub", sub);
+    }
+
+    function save(){
+      try { var o = {}; IDS.forEach(function(id){ o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+    }
+    function load(){
+      try {
+        var o = JSON.parse(localStorage.getItem(KEY) || "null");
+        if (o && typeof o === "object") IDS.forEach(function(id){ if (o[id] != null && o[id] !== "") $(id).value = o[id]; });
+      } catch (e) {}
+    }
+
+    load();
+    IDS.forEach(function(id){ $(id).addEventListener("input", render); });
+
+
+    render();
+  })();
+
+  // ===== Bo'limlar va pastki panel =====
+  (function(){
+    var V = {
+      m: {result:"result",   label:"Marketolog bonusi", title:"Tejamkorlik bonusi",   hash:""},
+      t: {result:"t-result", label:"Targetolog bonusi", title:"AI targetolog bonusi", hash:"#targetolog"}
+    };
+    var TABKEY = "bonus-bolim";
+    var $ = function(id){ return document.getElementById(id); };
+    var btns = document.querySelectorAll(".tabs [data-go]");
+    var parts = document.querySelectorAll("[data-view]");
+    var mbar = $("mbar"), io = null;
+
     try {
-      var o = JSON.parse(localStorage.getItem(KEY) || "null");
-      if (o && typeof o === "object") IDS.forEach(function(id){ if (o[id] != null && o[id] !== "") $(id).value = o[id]; });
+      io = new IntersectionObserver(function(es){
+        var vis = es[0].isIntersecting;
+        mbar.classList.toggle("show", !vis);
+        mbar.setAttribute("aria-hidden", vis ? "true" : "false");
+        $("m-go").tabIndex = vis ? -1 : 0;
+      }, {threshold: 0.15});
     } catch (e) {}
-  }
 
-  load();
-  IDS.forEach(function(id){ $(id).addEventListener("input", render); });
-  Object.keys(PRESETS).forEach(function(pid){ $(pid).addEventListener("click", function(){ applyPreset(pid); }); });
-  $("g-try").addEventListener("click", function(){
-    applyPreset("p-cheat");
-    $("result").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
-  });
-  $("m-go").addEventListener("click", function(){ $("result").scrollIntoView({behavior:"smooth", block:"start"}); });
+    function show(v){
+      if (!V[v]) v = "m";
+      cur = v;
+      Array.prototype.forEach.call(parts, function(el){ el.hidden = el.getAttribute("data-view") !== v; });
+      Array.prototype.forEach.call(btns, function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-go") === v ? "true" : "false"); });
+      $("m-label").textContent = V[v].label;
+      $("m-bonus").textContent = bars[v];
+      document.title = V[v].title;
+      if (io) { io.disconnect(); mbar.classList.remove("show"); io.observe($(V[v].result)); }
+      try { localStorage.setItem(TABKEY, v); } catch (e) {}
+      try { if (location.hash !== V[v].hash) history.replaceState(null, "", location.pathname + location.search + V[v].hash); } catch (e) {}
+    }
+    function fromHash(){
+      var h = location.hash.replace("#", "");
+      return h === "targetolog" ? "t" : (h === "marketolog" ? "m" : null);
+    }
 
-  try {
-    var mbar = $("mbar");
-    var io = new IntersectionObserver(function(es){
-      var vis = es[0].isIntersecting;
-      mbar.classList.toggle("show", !vis);
-      mbar.setAttribute("aria-hidden", vis ? "true" : "false");
-      $("m-go").tabIndex = vis ? -1 : 0;
-    }, {threshold: 0.15});
-    io.observe($("result"));
-  } catch (e) {}
+    Array.prototype.forEach.call(btns, function(b){
+      b.addEventListener("click", function(){ show(b.getAttribute("data-go")); });
+    });
+    $("m-go").addEventListener("click", function(){ $(V[cur].result).scrollIntoView({behavior:"smooth", block:"start"}); });
+    window.addEventListener("hashchange", function(){ var v = fromHash(); if (v && v !== cur) show(v); });
 
-  render();
+    var start = fromHash();
+    if (!start) { try { start = localStorage.getItem(TABKEY); } catch (e) {} }
+    show(start || "m");
+  })();
 })();
 </script>
 </body>
