@@ -81,6 +81,12 @@ h1{font:700 clamp(40px,7vw,72px)/.95 var(--f-head);letter-spacing:-.02em;margin:
 .fline .op{color:var(--hero-muted)}
 .fnote{font-size:13px;color:var(--hero-muted);margin:6px 0 0}
 
+/* ---------- Bo'limlar ---------- */
+.tabs{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;margin:0 0 24px;background:rgba(255,255,255,.07);border:1px solid var(--hero-line);border-radius:10px}
+.tabs a{color:var(--hero-muted);text-decoration:none;font:500 14px/1 var(--f-body);padding:9px 14px;border-radius:7px}
+.tabs a:hover{color:var(--hero-ink);background:rgba(255,255,255,.07)}
+.tabs a[aria-current="page"]{background:var(--hero-ink);color:var(--hero-bg)}
+
 /* ---------- Presets ---------- */
 .presets{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
 .presets .lbl{color:var(--hero-muted);font-size:13.5px}
@@ -198,6 +204,17 @@ tfoot td{font-weight:600;border-top:2px solid var(--line);background:var(--surfa
 .tag{display:inline-block;font:500 11.5px/1 var(--f-body);padding:4px 7px;border-radius:5px;background:var(--sunk);color:var(--muted)}
 .tag.crit{background:var(--crit-soft);color:var(--crit-ink)}
 .tag.warn{background:var(--warn-soft);color:var(--warn-ink)}
+.tag.good{background:var(--good-soft);color:var(--good-ink)}
+tr.hl td{background:var(--accent-soft);font-weight:600}
+td.good{color:var(--good-ink)}
+
+.notes{display:grid;gap:20px}
+@media (min-width:820px){.notes{grid-template-columns:1fr 1fr}}
+.note{padding:22px 24px;border-left:4px solid var(--accent)}
+.note.warn{border-left-color:var(--warn)}
+.note h2{font:600 clamp(20px,2.4vw,24px)/1.2 var(--f-head);margin:0 0 10px}
+.note p{margin:0 0 10px;color:var(--ink-2);max-width:62ch}
+.note p:last-child{margin-bottom:0}
 
 .guard{display:grid;gap:20px;padding:24px;border-left:4px solid var(--warn)}
 @media (min-width:820px){.guard{grid-template-columns:1fr 1.15fr;align-items:center}}
@@ -245,7 +262,7 @@ footer p{margin:0 0 6px;max-width:80ch}
   .extra{padding:14px 16px 18px}
   .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
   .compare{grid-template-columns:1fr}
-  .guard{padding:18px}
+  .guard,.note{padding:18px}
   details.fact summary{padding:18px}
   .fact-body{padding:0 18px 18px}
   .seg button{padding:9px 11px;font-size:13.5px}
@@ -271,6 +288,7 @@ footer p{margin:0 0 6px;max-width:80ch}
 <header class="top">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="wrap">
+    <nav class="tabs" aria-label="Bo'limlar"><a href="./" aria-current="page">Marketolog</a><a href="targetolog/">AI targetolog</a></nav>
     <p class="kicker"><span class="dot" aria-hidden="true"></span>Sinolife, Collagen M marketologi uchun KPI</p>
     <h1>Tejamkorlik bonusi</h1>
     <p class="lead">Standart kval lid narxi <b id="h-std">$4.00</b>, barcha xarajatlar bilan. Marketolog narxni shundan arzonga tushirsa, har tejalgan dollarning <b id="h-share">50%</b> i unga bonus bo'ladi.</p>
