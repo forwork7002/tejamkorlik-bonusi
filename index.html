@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tejamkorlik bonusi</title>
-<meta name="description" content="Sinolife Collagen M: marketolog va AI targetolog uchun bonus kalkulyatorlari">
+<meta name="description" content="Sinolife Collagen M: marketolog va targetolog uchun bonus kalkulyatorlari">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ footer p{margin:0 0 6px;max-width:80ch}
 <header class="top">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="wrap">
-    <nav class="tabs" aria-label="Bo'limlar"><button type="button" data-go="m" aria-pressed="true">Marketolog</button><button type="button" data-go="t" aria-pressed="false">AI targetolog</button></nav>
+    <nav class="tabs" aria-label="Bo'limlar"><button type="button" data-go="m" aria-pressed="true">Marketolog</button><button type="button" data-go="t" aria-pressed="false">Targetolog</button></nav>
     <div data-view="m">
     <p class="kicker"><span class="dot" aria-hidden="true"></span>Sinolife, Collagen M marketologi uchun KPI</p>
     <h1>Tejamkorlik bonusi</h1>
@@ -311,7 +311,7 @@ footer p{margin:0 0 6px;max-width:80ch}
     </div>
     <div data-view="t" hidden>
     <p class="kicker"><span class="dot" aria-hidden="true"></span>Sinolife, Collagen M targetologi uchun KPI</p>
-    <h1>AI targetolog bonusi</h1>
+    <h1>Targetolog bonusi</h1>
     <p class="lead">Standart kval lid narxi <b id="t-h-std">$2.80</b>, forma va DM birga. Targetolog narxni shundan arzonga tushirsa, har tejalgan dollarning <b id="t-h-share">25%</b> i unga bonus bo'ladi.</p>
     <div class="formula" aria-label="Formula">
       <div class="fline"><span class="t res">Haqiqiy narx</span><span class="op">=</span><span class="op">(</span><span class="t">Forma byudjeti</span><span class="op">+</span><span class="t">DM byudjeti</span><span class="op">)</span><span class="op">÷</span><span class="op">(</span><span class="t">Kval lid</span><span class="op">+</span><span class="t">Kval lid DM</span><span class="op">)</span></div>
@@ -837,7 +837,7 @@ footer p{margin:0 0 6px;max-width:80ch}
     render();
   })();
 
-  // ===== AI targetolog bonusi (id lar "t-" bilan) =====
+  // ===== Targetolog bonusi (id lar "t-" bilan) =====
   (function(){
     "use strict";
     var IDS = ["i-std","i-share","i-min","f-bud","f-lead","f-q","d-bud","d-msg","d-lead","d-q"];
@@ -1041,7 +1041,7 @@ footer p{margin:0 0 6px;max-width:80ch}
   (function(){
     var V = {
       m: {result:"result",   label:"Marketolog bonusi", title:"Tejamkorlik bonusi",   hash:""},
-      t: {result:"t-result", label:"Targetolog bonusi", title:"AI targetolog bonusi", hash:"#targetolog"}
+      t: {result:"t-result", label:"Targetolog bonusi", title:"Targetolog bonusi", hash:"#targetolog"}
     };
     var TABKEY = "bonus-bolim";
     var $ = function(id){ return document.getElementById(id); };
